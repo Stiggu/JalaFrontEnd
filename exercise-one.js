@@ -72,14 +72,14 @@ class Cat {
         this.tiredness = this.tiredness - hours;
         this.hunger = this.hunger + 2;
         this.loneliness = this.loneliness + 3;
-        console.log(`Kitty went to bed, rested and now its tiredness is: ${this.tiredness}`)
+        console.log(`${this.name} went to bed, rested and now its tiredness is: ${this.tiredness}`)
     }
     
     play() {
         this.loneliness = 1;
         this.hunger = this.hunger + 3;
         this.tiredness = this.tiredness + 5;
-        console.log(`You played with kitty, now it's loneliness is: ${this.loneliness}`)
+        console.log(`You played with ${this.name}, now it's loneliness is: ${this.loneliness}`)
     }
     
     eat() {
@@ -117,7 +117,7 @@ const zenitsu = new Cat('Zenitsu');
 const tomasa = new Cat('Tomasa');
 Cat.feed(zenitsu, tomasa);
 zenitsu.play();
-zenitsu.sleep();
+zenitsu.sleep(5);
 zenitsu.status();
 Cat.playTogether(zenitsu, tomasa);
 
