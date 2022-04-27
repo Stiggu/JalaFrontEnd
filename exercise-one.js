@@ -127,10 +127,13 @@ Cat.playTogether(zenitsu, tomasa);
 
 // Most frequent item inside an array
 const frequents1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
-const mostFrequent = (frequents) => frequents.reduce((previousValue, currentValue, currentIdx, currentArr) =>
+const mostFrequent = (frequents) => `${frequents.reduce((previousValue, currentValue, currentIdx, currentArr) =>
+    currentArr.filter(v => v === previousValue).length >
+    currentArr.filter( v => v === currentValue).length ? previousValue : currentValue, 0)} ` + 
+    `(${frequents.filter(mostFrequentItem => mostFrequentItem === frequents.reduce((previousValue, currentValue, currentIdx, currentArr) =>
     currentArr.filter(v => v === previousValue).length > 
     currentArr.filter( v => v === currentValue).length ?
-    previousValue : currentValue, 0);
+    previousValue : currentValue, 0)).length} times)`;
 console.log(mostFrequent(frequents1));
 
 
