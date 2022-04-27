@@ -12,10 +12,10 @@ class Cat {
     #name;
     
     constructor(name) {
-        this.name = name;
-        this.hunger = Math.floor(Math.random() * this.#max) + 1;
-        this.loneliness = Math.floor(Math.random() * this.#max) + 1;
-        this.tiredness = Math.floor(Math.random() * this.#max) + 1;
+        this.#name = name;
+        this.#hunger = Math.floor(Math.random() * this.#max) + 1;
+        this.#loneliness = Math.floor(Math.random() * this.#max) + 1;
+        this.#tiredness = Math.floor(Math.random() * this.#max) + 1;
     }
     
     get name(){
@@ -88,7 +88,7 @@ class Cat {
     }
     
     static feed(...cats){
-        cats.forEach((cat) => {
+        cats.map(cat => {
             cat.eat();
             console.log(`${cat.name} has been feed, their hunger is at ${cat.hunger}`)
         })
