@@ -1,7 +1,7 @@
 ﻿/* Theory questions!
 * 
 * 1. null || 2 || undefined = 2
-* 2. alert(1) || 2 || alert(3) = Alerts 1 and returns 2
+* 2. alert(alert(1) || 2 || alert(3)) = Alerts 1 and Alerts 2
 * 3. alert(alert(1) && alert(2)) = Alerts 1
 * 4. alert(null || 2 && 3 || 4) = Alerts 3
 * 5. Done down in the script
