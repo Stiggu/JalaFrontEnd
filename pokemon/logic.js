@@ -13,6 +13,12 @@
 
 customElements.define('pokemon-card', Pokemon);
 
-for(let x = 0; x < dataPokemons["results"].length; x++){
-    new Pokemon(dataPokemons["results"][x].name, getPokemonImageUri(x+1), pokemonColorMap[x+1]);
-}
+
+
+fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=25')
+.then(res => res.json())
+.then(data => {
+    for(let x = 0; x < data["results"].length; x++){
+        new Pokemon(data["results"][x].name, getPokemonImageUri(x+1), pokemonColorMap[x+1]);
+    }
+})
