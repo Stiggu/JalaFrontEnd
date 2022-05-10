@@ -13,8 +13,6 @@
 
 customElements.define('pokemon-card', Pokemon);
 
-
-
 fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=25')
 .then(res => res.json())
 .then(data => {
