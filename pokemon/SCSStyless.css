@@ -1,0 +1,52 @@
+#app {
+  display: grid;
+  grid-template-areas: "header header header" "content content content" "footer footer footer";
+  margin: 0;
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  max-height: 150px;
+}
+header nav img {
+  max-width: 200px;
+}
+
+footer {
+  color: white;
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  background-color: rgba(0, 0, 0, 0.3);
+  max-height: 150px;
+  min-height: 150px;
+}
+
+#pokemon-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  grid-area: content;
+}
+#pokemon-container .container {
+  /* text */
+  text-align: center;
+  color: white;
+  font-family: Consolas, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  -webkit-text-stroke: 1px black;
+  /* layout */
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+#pokemon-container #avatar {
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=SCSStyless.css.map */
