@@ -3,10 +3,10 @@
         super();
         let pokemonTemplate = document.getElementById('card-template');
         let card = pokemonTemplate.content.cloneNode(true);
-        card.querySelector('.poke-container').style.backgroundColor = colour;
-        card.querySelector('.poke-container>#avatar').style.backgroundColor = "rgba(0,0,0,0.1)";
-        card.querySelector('.poke-container>#avatar>.avatar').setAttribute('src', avatar);
-        card.querySelector('.poke-container>#name>.name').innerText = name.toUpperCase();
+        card.querySelector('.container').style.backgroundColor = colour;
+        card.querySelector('.container>#avatar').style.backgroundColor = "rgba(0,0,0,0.1)";
+        card.querySelector('.container>#avatar>.avatar').setAttribute('src', avatar);
+        card.querySelector('.container>#name>.name').innerText = name.toUpperCase();
         const pc = document.getElementById("pokemon-container");
         pc.appendChild(card);
     }
