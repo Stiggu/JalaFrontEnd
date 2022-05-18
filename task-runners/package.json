@@ -1,0 +1,13 @@
+{
+  "name": "task-runners",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "node -e \"if(process.env.npm_execpath.match('yarn')){console.log('Use NPM'); process.exit(1);}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
