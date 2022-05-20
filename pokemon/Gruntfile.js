@@ -7,18 +7,26 @@
                 banner: '/*!<%= grunt.template.today("yyyy-mm-dd") %> */\n',
             },
             build: {
-                files: [{
+                files: {
                     // 'dist/js/logic.min.js': 'src/logic.js',
                     // 'dist/js/utils.min.js': 'src/utils.js',
-                    // 'dist/js/compiled.min.js': 'src/*.js',
-                    cwd:'./src',
-                    src:'**/*.js',
-                    dest:'./dist/js/*.js'
-                }]
+                    'dist/js/compiled.min.js': 'src/*.js',
+                }
+            }
+        },
+        sass: {
+            options: {
+                style: 'compressed'
+            },
+            build: {
+                files: {
+                    'dist/css/styles.min.js': 'src/sass/*.sass',
+                }
             }
         }
     })
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.registerTask('default', ['uglify']);
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.registerTask('default', ['uglify', 'sass']);
 }
