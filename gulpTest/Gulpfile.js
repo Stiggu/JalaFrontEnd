@@ -12,7 +12,7 @@ function concatMinify(cb) {
     cb();
 }
 
-function ugliness(cb){
+function uglification(cb){
     src('./src/*.js')
         .pipe(concat('app.js'))
         .pipe(dest('./dist/js/'))
@@ -24,7 +24,7 @@ function ugliness(cb){
 }
 
 function generateCSS(cb) {
-    src('./src/sass/*.sass')
+    src(['./src/sass/*.sass', './src/sass/*.scss'])
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(dest('./dist/css/'));
     cb();
@@ -35,4 +35,4 @@ function cleanFolders(cb) {
     cb();
 }
 
-exports.default = series(cleanFolders, generateCSS, concatMinify, ugliness);
+exports.default = series(cleanFolders, generateCSS, concatMinify, uglification);

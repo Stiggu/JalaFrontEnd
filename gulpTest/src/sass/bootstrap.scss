@@ -1,0 +1,22 @@
+﻿$header-logo-width: 200px;
+
+header{
+  nav {
+    img {
+      max-width: $header-logo-width;
+    }
+  }
+}
+
+#pokemon-container {
+  text-align: center;
+  color: white;
+  font-family: Consolas, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  -webkit-text-stroke: 1px black;
+  /* layout */
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
