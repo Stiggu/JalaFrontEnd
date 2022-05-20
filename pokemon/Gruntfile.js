@@ -20,7 +20,7 @@
             },
             build: {
                 files: {
-                    'dist/css/styles.min.js': 'src/sass/*.sass',
+                    'dist/css/styles.min.sass': 'src/sass/*.sass',
                 }
             }
         }
