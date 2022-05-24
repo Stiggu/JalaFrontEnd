@@ -1,13 +1,11 @@
-﻿const path = require('path')
+﻿const join = require('path').join
 
 module.exports = {
-    mode: 'none',
     entry: {
-        app: './src/index.js',
+        main: './src/index.js',
     },
     output: {
-        // filename: 'bundle.js'
         filename: '[name].js',
-        path: path.join(__dirname, 'build')
+        path: join(__dirname, 'dist')
     }
 }
