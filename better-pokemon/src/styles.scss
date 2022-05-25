@@ -1,0 +1,11 @@
+﻿@import "bootstrap";
+
+$header-logo-width: 200px;
+
+header{
+  nav {
+    img {
+      max-width: $header-logo-width;
+    }
+  }
+}
