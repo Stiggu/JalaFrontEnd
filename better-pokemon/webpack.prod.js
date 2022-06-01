@@ -5,12 +5,13 @@ const nodeExternals = require("webpack-node-externals");
 const EncryptModule = require("webpack-encrypt-nodejs-module");
 const JavaScriptObfuscator = require("webpack-obfuscator");
 const CopyPlugin = require("copy-webpack-plugin");
+const path = require('path');
 
 module.exports = merge(common, {
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',
-        path: __dirname + '/build'
+        path: path.join(__dirname, "build")
     },
     plugins: [
         new EncryptModule({
@@ -22,11 +23,9 @@ module.exports = merge(common, {
         }),
         new JavaScriptObfuscator(
             {
-                // obfuscate code first
                 unicodeEscapeSequence: true,
                 rotateUnicodeArray: true,
             },
-            ["excluded_bundle_name.js"]
         ),
         new CopyPlugin({
             patterns: ["package.json"],
@@ -58,6 +57,13 @@ module.exports = merge(common, {
                 },
             },
         },
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 9000,
     },
     devtool: 'source-map'
 })
