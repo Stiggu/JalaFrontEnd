@@ -2,9 +2,10 @@
   "name": "ts-class",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node ./index.ts"
+    "start": "ts-node src/index.ts",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
