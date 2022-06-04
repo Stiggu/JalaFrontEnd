@@ -1,30 +1,39 @@
-﻿type Move = {
+﻿import {log} from "util";
+
+type Move = {
     name: string,
     power: number
 };
 
-function checkPP() {
-    return (target: any, memberName: string, propertyDescriptor: PropertyDescriptor) => {
-        return console.log(target);
+const checkPP = (target: object, key:string, descriptor: PropertyDescriptor) => {
+    const originalValue = descriptor.value;
+    descriptor.value = function (...args: never) {
+        const pokemon = this as Pokemon;
+        if(pokemon.ppAvailable > 0){
+            originalValue.apply(this, args);
+        } else {
+            console.log(`${pokemon.name} doesn't have any energy left.`);
+        }
+        return descriptor;
     };
-}
+};
 
 class Pokemon {
     name: string;
-    ppAvailable = 1;
+    ppAvailable = 0;
 
     constructor(name: string, ppAvailable: number) {
         this.name = name;
         this.ppAvailable = ppAvailable;
     }
 
-    @checkPP()
+    @checkPP
     fight(move: Move) {
         console.log(`${this.name} used ${move?.name}!`);
         this.ppAvailable -= 1;
     }
 
-    calculateDamage(move: any) {
+    calculateDamage(move: Move) {
         return move.power;
     }
 }
