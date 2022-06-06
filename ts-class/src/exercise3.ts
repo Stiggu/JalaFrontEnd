@@ -1,6 +1,4 @@
-﻿import {log} from "util";
-
-type Move = {
+﻿type Move = {
     name: string,
     power: number
 };
@@ -10,12 +8,13 @@ const checkPP = (target: object, key:string, descriptor: PropertyDescriptor) => 
     descriptor.value = function (...args: never) {
         const pokemon = this as Pokemon;
         if(pokemon.ppAvailable > 0){
-            originalValue.apply(this, args);
+            originalValue.apply(pokemon, args);
         } else {
             console.log(`${pokemon.name} doesn't have any energy left.`);
         }
-        return descriptor;
     };
+
+    return descriptor;
 };
 
 class Pokemon {
@@ -40,5 +39,8 @@ class Pokemon {
 
 const thunderbolt: Move = {name: 'thunderbolt', power: 90};
 const pikachu = new Pokemon('pikachu', 1);
+pikachu.fight(thunderbolt);
+pikachu.fight(thunderbolt);
+pikachu.fight(thunderbolt);
 pikachu.fight(thunderbolt);
 pikachu.fight(thunderbolt);
