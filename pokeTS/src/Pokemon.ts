@@ -17,10 +17,14 @@ export function getSinglePokemon(id: string | number) {
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
-function getNewPokemons(...args: number[]) {
+function getNewPokemons(pokemonsToGet: number) {
+    const pokemons: number[] = [];
+    for (let pokeIndex = 0; pokeIndex <= pokemonsToGet; pokeIndex++) {
+        pokemons.push(Math.floor(Math.random() * 500));
+    }
     return function _getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
         return class extends constructor {
-            listOfIds = args;
+            listOfIds = pokemons;
         }
     }
 }
@@ -61,7 +65,7 @@ export class Pokemon {
         this.buildFieldsPokemon(pokemonResult);
     }
 
-    static parsePokemonData(pokemon: any): PokemonData {
+    static responseToPokeData(pokemon: any): PokemonData {
         return {
             name: pokemon.name,
             id: pokemon.id,
@@ -125,7 +129,7 @@ export class Pokemon {
     }
 }
 
-@getNewPokemons(1, 2, 3, 4)
+@getNewPokemons(3)
 export class PokemonTrainer {
     name: string;
     pokemons: Pokemon[] = [];
@@ -139,7 +143,7 @@ export class PokemonTrainer {
         const listPokemons = this.listOfIds.map(id => getSinglePokemon(id));
         const results = await Promise.all(listPokemons)
         results.forEach(result => {
-            const pokeData: PokemonData = Pokemon.parsePokemonData(result.data);
+            const pokeData: PokemonData = Pokemon.responseToPokeData(result.data);
             this.pokemons.push(new Pokemon(pokeData));
         });
     }
