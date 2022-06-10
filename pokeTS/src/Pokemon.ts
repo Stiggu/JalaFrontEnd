@@ -87,7 +87,7 @@ export class Pokemon {
         return await Promise.resolve(axios.get(url));
     }
     
-    setDefaultMoves(pokemon: PokemonData){
+    getDefaultMoves(pokemon: PokemonData){
         const movesToLook: Move[] = []
         for (let currentMove = 0; currentMove < pokemon.moves.length; currentMove++) {
             if (currentMove === 4) {
@@ -104,7 +104,7 @@ export class Pokemon {
         return movesToLook;
     }
 
-    async getPokemonMoves() {
+    async getDetailedMoves() {
         const movesToLook: Move[] = []
 
         for (let move of this.moves) {
@@ -122,21 +122,19 @@ export class Pokemon {
         return movesToLook;
     }
 
-    getPokemonTypes(pokemon: PokemonData) {
-        pokemon.types.forEach(typeData => {
-            this.types.push(typeData.type)
-        })
+    getDefaultTypes(pokemon: PokemonData) {
+        return pokemon.types.map(typeData => typeData.type);
     }
 
     buildFieldsPokemon(pokemon: PokemonData) {
         this.name = pokemon.name;
         this.id = pokemon.id;
-        this.getPokemonTypes(pokemon);
-        this.moves = this.setDefaultMoves(pokemon);
+        this.types = this.getDefaultTypes(pokemon);
+        this.moves = this.getDefaultMoves(pokemon);
     }
 
     async displayInfo() {
-        this.moves = await this.getPokemonMoves();
+        this.moves = await this.getDetailedMoves();
         console.log(`${colours.fgGreen}==========================\n${colours.reset}`);
         console.log(`${colours.fgRed}${this.id} ${colours.reset}- ${colours.fgMagenta}${this.name.toUpperCase()}${colours.reset}`);
         console.log(`${colours.fgGreen}\n### ${colours.fgYellow}Types ${colours.fgGreen}###${colours.fgWhite}`)
