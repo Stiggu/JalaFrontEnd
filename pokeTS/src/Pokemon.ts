@@ -13,7 +13,7 @@ List of goals:
   ✅ re-write decorator to get new pokemons Ids in PokemonTrainer class 
 */
 
-export const colors = {
+export const colours = {
     reset: "\x1b[0m",
     fgGreen: "\x1b[32m",
     fgCyan: "\x1b[36m",
@@ -25,8 +25,8 @@ export const colors = {
 
 function getNewPokemons(pokemonsToGet: number) {
     const pokemons: number[] = [];
-    for (let pokeIndex = 0; pokeIndex <= pokemonsToGet; pokeIndex++) {
-        pokemons.push(Math.floor(Math.random() * 500));
+    for (let pokeIndex = 0; pokeIndex < pokemonsToGet; pokeIndex++) {
+        pokemons.push(Math.floor(Math.random() * maxPokemons));
     }
     return function _getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
         return class extends constructor {
@@ -34,6 +34,8 @@ function getNewPokemons(pokemonsToGet: number) {
         }
     }
 }
+
+const maxPokemons = 868;
 
 type Move = {
     name: string;
@@ -58,7 +60,6 @@ type PokemonData = {
     }],
     name: string,
     id: number,
-
 }
 
 export class Pokemon {
@@ -85,8 +86,8 @@ export class Pokemon {
     async getSingleMove(url: string) {
         return await Promise.resolve(axios.get(url));
     }
-
-    async getPokemonMoves(pokemon: PokemonData) {
+    
+    setDefaultMoves(pokemon: PokemonData){
         const movesToLook: Move[] = []
         for (let currentMove = 0; currentMove < pokemon.moves.length; currentMove++) {
             if (currentMove === 4) {
@@ -94,16 +95,30 @@ export class Pokemon {
             }
             const currentSkillIndex = Math.floor(Math.random() * (pokemon.moves.length + 1))
             const partialSkill = pokemon.moves.splice(currentSkillIndex, 1)[0];
-            const result = await this.getSingleMove(partialSkill.move.url);
+            const move: Move = {
+                name: partialSkill.move.name,
+                url: partialSkill.move.url
+            }
+            movesToLook.push(move);
+        }
+        return movesToLook;
+    }
+
+    async getPokemonMoves() {
+        const movesToLook: Move[] = []
+
+        for (let move of this.moves) {
+            const result = await this.getSingleMove(move.url);
             movesToLook.push({
-                name: result.data.name,
-                url: partialSkill.move.url,
+                name: move.name,
+                url: move.url,
                 powerPoints: result.data.pp ?? 0,
                 accuracy: result.data.accuracy ?? 0,
                 damage: result.data.power ?? 0,
                 type: result.data.type,
             })
         }
+
         return movesToLook;
     }
 
@@ -113,26 +128,26 @@ export class Pokemon {
         })
     }
 
-    async buildFieldsPokemon(pokemon: PokemonData) {
+    buildFieldsPokemon(pokemon: PokemonData) {
         this.name = pokemon.name;
         this.id = pokemon.id;
         this.getPokemonTypes(pokemon);
-        this.moves = await this.getPokemonMoves(pokemon);
+        this.moves = this.setDefaultMoves(pokemon);
     }
 
     async displayInfo() {
-        const moves = await this.getPokemonMoves(this.completeData);
-        console.log(`${colors.fgGreen}==========================\n${colors.reset}`);
-        console.log(`${colors.fgRed}${this.id} ${colors.reset}- ${colors.fgMagenta}${this.name.toUpperCase()}${colors.reset}`);
-        console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Types ${colors.fgGreen}###${colors.fgWhite}`)
+        this.moves = await this.getPokemonMoves();
+        console.log(`${colours.fgGreen}==========================\n${colours.reset}`);
+        console.log(`${colours.fgRed}${this.id} ${colours.reset}- ${colours.fgMagenta}${this.name.toUpperCase()}${colours.reset}`);
+        console.log(`${colours.fgGreen}\n### ${colours.fgYellow}Types ${colours.fgGreen}###${colours.fgWhite}`)
         this.types.forEach(type => {
             console.log(`- ${type.name.replace(/^\w/, character => character.toUpperCase())}`);
         });
-        console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Moves ${colors.fgGreen}###${colors.fgWhite}`)
-        moves.forEach(move => {
-            console.log(`- ${move.name.replace(/^\w/, character => character.toUpperCase())} ${colors.reset}- ${colors.fgGreen}Damage: ${colors.fgRed}${move.damage} ${colors.reset}- ${colors.fgGreen}PP: ${colors.fgRed}${move.powerPoints} ${colors.reset}- ${colors.fgGreen}ACC: ${colors.fgRed}${move.accuracy}${colors.reset}`);
+        console.log(`${colours.fgGreen}\n### ${colours.fgYellow}Moves ${colours.fgGreen}###${colours.fgWhite}`)
+        this.moves.forEach(move => {
+            console.log(`- ${move.name.replace(/^\w/, character => character.toUpperCase())} ${colours.reset}- ${colours.fgGreen}Damage: ${colours.fgRed}${move.damage} ${colours.reset}- ${colours.fgGreen}PP: ${colours.fgRed}${move.powerPoints} ${colours.reset}- ${colours.fgGreen}ACC: ${colours.fgRed}${move.accuracy}${colours.reset}`);
         });
-        console.log(colors.reset);
+        console.log(colours.reset);
     }
 }
 
@@ -151,17 +166,17 @@ export class PokemonTrainer {
     }
 
     async getPokemons() {
-        const listPokemons = this.listOfIds.map(async id => await this.getSinglePokemon(id));
+        const listPokemons = this.listOfIds.map(async id => await Promise.resolve(this.getSinglePokemon(id)));
         const results = await Promise.all(listPokemons);
-        results.forEach(result => {
-            const pokeData: PokemonData = Pokemon.responseToPokeData(result.data);
+        for (const result of results) {
+            const pokeData: PokemonData = await Pokemon.responseToPokeData(result.data);
             this.pokemons.push(new Pokemon(pokeData));
-        });
+        }
     }
 
     async showTeam() {
         await this.getPokemons();
-        console.log('Trainer:', `${colors.fgMagenta}${this.name}`);
+        console.log('Trainer:', `${colours.fgMagenta}${this.name}`);
         this.pokemons.forEach((pokemon) => pokemon.displayInfo());
     }
 }
