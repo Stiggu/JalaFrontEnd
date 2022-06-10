@@ -13,6 +13,16 @@ List of goals:
   ✅ re-write decorator to get new pokemons Ids in PokemonTrainer class 
 */
 
+export const colors = {
+    reset: "\x1b[0m",
+    fgGreen: "\x1b[32m",
+    fgCyan: "\x1b[36m",
+    fgWhite: "\x1b[37m",
+    fgRed: "\x1b[31m",
+    fgYellow: "\x1b[33m",
+    fgMagenta: "\x1b[35m",
+}
+
 export function getSinglePokemon(id: string | number) {
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
@@ -60,8 +70,10 @@ export class Pokemon {
     id: number = 0;
     moves: Move[] = [];
     types: Type[] = [];
+    completeData: PokemonData;
 
     constructor(pokemonResult: PokemonData) {
+        this.completeData = pokemonResult;
         this.buildFieldsPokemon(pokemonResult);
     }
 
@@ -100,32 +112,31 @@ export class Pokemon {
     }
 
     getPokemonTypes(pokemon: PokemonData) {
-        pokemon.types.forEach(typeData => this.types.push(typeData.type))
+        pokemon.types.forEach(typeData => {
+            this.types.push(typeData.type)
+        })
     }
 
     async buildFieldsPokemon(pokemon: PokemonData) {
         this.name = pokemon.name;
         this.id = pokemon.id;
-        this.moves = await this.getPokemonMoves(pokemon);
         this.getPokemonTypes(pokemon);
+        this.moves = await this.getPokemonMoves(pokemon);
     }
-
+    
     async displayInfo() {
-        console.log(`==========================`);
-        console.log(`${this.id} ${this.name}`);
-        if (this.types.length > 0) {
-            console.log(`Type:`)
-            this.types.forEach(type => {
-                console.log(`${type.name}`);
-            });
-        }
-
-        if (this.moves.length > 0) {
-            console.log(`Moves:`)
-            this.moves.forEach(move => {
-                console.log(`${move.name}`);
-            });
-        }
+        const moves = await this.getPokemonMoves(this.completeData);
+        console.log(`${colors.fgGreen}==========================\n${colors.reset}`);
+        console.log(`${colors.fgRed}${this.id} ${colors.fgGreen}- ${colors.fgMagenta}${this.name.toUpperCase()}${colors.reset}`);
+        console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Types ${colors.fgGreen}###${colors.fgWhite}`)
+        this.types.forEach(type => {
+            console.log(`- ${type.name.replace(/^\w/, character => character.toUpperCase())}`);
+        });
+        console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Moves ${colors.fgGreen}###${colors.fgWhite}`)
+        moves.forEach(move => {
+            console.log(`- ${move.name.replace(/^\w/, character => character.toUpperCase())}`);
+        });
+        console.log(colors.reset);
     }
 }
 
@@ -141,7 +152,7 @@ export class PokemonTrainer {
 
     async getPokemons() {
         const listPokemons = this.listOfIds.map(id => getSinglePokemon(id));
-        const results = await Promise.all(listPokemons)
+        const results = await Promise.all(listPokemons);
         results.forEach(result => {
             const pokeData: PokemonData = Pokemon.responseToPokeData(result.data);
             this.pokemons.push(new Pokemon(pokeData));
@@ -150,9 +161,7 @@ export class PokemonTrainer {
 
     async showTeam() {
         await this.getPokemons();
-        console.log('Trainer:', this.name);
-        this.pokemons.forEach(pokemon => {
-            pokemon.displayInfo();
-        });
+        console.log('Trainer:', `${colors.fgMagenta}${this.name}`);
+        this.pokemons.forEach(( pokemon) => pokemon.displayInfo());
     }
 }
