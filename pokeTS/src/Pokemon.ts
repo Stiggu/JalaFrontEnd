@@ -23,10 +23,6 @@ export const colors = {
     fgMagenta: "\x1b[35m",
 }
 
-export function getSinglePokemon(id: string | number) {
-    return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-}
-
 function getNewPokemons(pokemonsToGet: number) {
     const pokemons: number[] = [];
     for (let pokeIndex = 0; pokeIndex <= pokemonsToGet; pokeIndex++) {
@@ -77,7 +73,7 @@ export class Pokemon {
         this.buildFieldsPokemon(pokemonResult);
     }
 
-    static responseToPokeData(pokemon: any): PokemonData {
+    static responseToPokeData(pokemon: PokemonData): PokemonData {
         return {
             name: pokemon.name,
             id: pokemon.id,
@@ -102,9 +98,9 @@ export class Pokemon {
             movesToLook.push({
                 name: result.data.name,
                 url: partialSkill.move.url,
-                powerPoints: result.data.pp,
-                accuracy: result.data.accuracy,
-                damage: result.data.power,
+                powerPoints: result.data.pp ?? 0,
+                accuracy: result.data.accuracy ?? 0,
+                damage: result.data.power ?? 0,
                 type: result.data.type,
             })
         }
@@ -123,18 +119,18 @@ export class Pokemon {
         this.getPokemonTypes(pokemon);
         this.moves = await this.getPokemonMoves(pokemon);
     }
-    
+
     async displayInfo() {
         const moves = await this.getPokemonMoves(this.completeData);
         console.log(`${colors.fgGreen}==========================\n${colors.reset}`);
-        console.log(`${colors.fgRed}${this.id} ${colors.fgGreen}- ${colors.fgMagenta}${this.name.toUpperCase()}${colors.reset}`);
+        console.log(`${colors.fgRed}${this.id} ${colors.reset}- ${colors.fgMagenta}${this.name.toUpperCase()}${colors.reset}`);
         console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Types ${colors.fgGreen}###${colors.fgWhite}`)
         this.types.forEach(type => {
             console.log(`- ${type.name.replace(/^\w/, character => character.toUpperCase())}`);
         });
         console.log(`${colors.fgGreen}\n### ${colors.fgYellow}Moves ${colors.fgGreen}###${colors.fgWhite}`)
         moves.forEach(move => {
-            console.log(`- ${move.name.replace(/^\w/, character => character.toUpperCase())}`);
+            console.log(`- ${move.name.replace(/^\w/, character => character.toUpperCase())} ${colors.reset}- ${colors.fgGreen}Damage: ${colors.fgRed}${move.damage} ${colors.reset}- ${colors.fgGreen}PP: ${colors.fgRed}${move.powerPoints} ${colors.reset}- ${colors.fgGreen}ACC: ${colors.fgRed}${move.accuracy}${colors.reset}`);
         });
         console.log(colors.reset);
     }
@@ -150,8 +146,12 @@ export class PokemonTrainer {
         this.name = name;
     }
 
+    async getSinglePokemon(id: string | number) {
+        return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    }
+
     async getPokemons() {
-        const listPokemons = this.listOfIds.map(id => getSinglePokemon(id));
+        const listPokemons = this.listOfIds.map(async id => await this.getSinglePokemon(id));
         const results = await Promise.all(listPokemons);
         results.forEach(result => {
             const pokeData: PokemonData = Pokemon.responseToPokeData(result.data);
@@ -162,6 +162,6 @@ export class PokemonTrainer {
     async showTeam() {
         await this.getPokemons();
         console.log('Trainer:', `${colors.fgMagenta}${this.name}`);
-        this.pokemons.forEach(( pokemon) => pokemon.displayInfo());
+        this.pokemons.forEach((pokemon) => pokemon.displayInfo());
     }
 }
