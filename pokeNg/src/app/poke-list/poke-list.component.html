@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-3 align-self-center d-flex flex-column">
+      <label for="task-input">TODO</label>
+      <input id="task-input" type="text" placeholder="Enter a task" [(ngModel)]="itemToAdd" value="itemToAdd">
+      <button (click)="addItem()">Add</button>
+
+      <ul>
+        <div *ngFor="let todo of todoList">
+          <li>
+            <button>Check</button>
+            {{todo.text}}
+            <button>Delete</button>
+          </li>
+        </div>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+

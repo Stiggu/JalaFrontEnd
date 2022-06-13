@@ -153,7 +153,7 @@ export class Pokemon {
 export class PokemonTrainer {
     name: string;
     pokemons: Pokemon[] = [];
-    listOfIds: number[] = [2, 4];
+    listOfIds: number[] = [];
 
     constructor(name: string) {
         this.name = name;
