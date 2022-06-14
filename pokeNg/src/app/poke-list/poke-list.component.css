@@ -1,3 +1,9 @@
-
+#poke-list {
+  font-family: Consolas;
+  background-color: #111;
+}
+#poke-list .row {
+  height: 100vh;
+}
 
 /*# sourceMappingURL=poke-list.component.css.map */

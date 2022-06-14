@@ -1,21 +1,33 @@
-<div class="container-fluid">
+<div class="container-fluid text-white" id="poke-list">
   <div class="row justify-content-center align-items-center">
+
     <div class="col-3 align-self-center d-flex flex-column">
-      <label for="task-input">TODO</label>
-      <input id="task-input" type="text" placeholder="Enter a task" [(ngModel)]="itemToAdd" value="itemToAdd">
-      <button (click)="addItem()">Add</button>
-
-      <ul>
-        <div *ngFor="let todo of todoList">
-          <li>
-            <button>Check</button>
-            {{todo.text}}
-            <button>Delete</button>
-          </li>
-        </div>
-      </ul>
-
+      <div class="card bg-dark p-2">
+        <label for="task-input" class="text-center">TODO</label>
+        <input id="task-input" type="text" placeholder="Enter a task" [(ngModel)]="itemToAdd" value="itemToAdd">
+        <button class="btn btn-success" (click)="addItem()">Add</button>
+      </div>
     </div>
+
+    <div class="col-5 mt-3">
+      <ul class="list-group bg-dark">
+        <li class="list-group-item bg-dark text-white d-flex d-inline align-items-center" *ngFor="let todo of todoList">
+          <div class="d-flex flex-column">
+            <button class="btn btn-outline-success m-2" (click)="completeItem(todo.id.toString())">✓</button>
+            <button class="btn btn-outline-danger m-2" (click)="deleteItem(todo.id)">✗</button>
+          </div>
+          <div class="text-white m-2 text-wrap text-center" [id]="todo.id">
+            {{todo.text}}
+          </div>
+        </li>
+
+        <li class="list-group-item bg-dark text-white" *ngIf="todoList.length > 0">
+          Tasks: {{todoList.length}}
+        </li>
+
+      </ul>
+    </div>
+
   </div>
 </div>
 
