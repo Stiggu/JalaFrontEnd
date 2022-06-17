@@ -29,6 +29,6 @@ export class PokeListComponent {
   }
 
   deleteItem(id: number){
-    this.todoList.splice(id-1, 1);
+    this.todoList.splice(id, 1);
   }
 }
