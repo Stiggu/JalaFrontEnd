@@ -11,12 +11,12 @@
 
     <div class="col-5 mt-3">
       <ul class="list-group bg-dark">
-        <li class="list-group-item bg-dark text-white d-flex d-inline align-items-center" *ngFor="let todo of todoList">
+        <li class="list-group-item bg-dark text-white d-flex d-inline align-items-center" *ngFor="let todo of todoList; index as i">
           <div class="d-flex flex-column">
-            <button class="btn btn-outline-success m-2" (click)="completeItem(todo.id.toString())">✓</button>
-            <button class="btn btn-outline-danger m-2" (click)="deleteItem(todo.id)">✗</button>
+            <button class="btn btn-outline-success m-2" (click)="completeItem(i)">✓</button>
+            <button class="btn btn-outline-danger m-2" (click)="deleteItem(i)">✗</button>
           </div>
-          <div class="text-white m-2 text-wrap text-center" [id]="todo.id">
+          <div class="text-white m-2 text-wrap text-center" [ngClass]="{'cross-item':todo.done}" [id]="i">
             {{todo.text}}
           </div>
         </li>

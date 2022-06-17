@@ -6,4 +6,8 @@
   height: 100vh;
 }
 
+.cross-item {
+  text-decoration: line-through;
+}
+
 /*# sourceMappingURL=poke-list.component.css.map */

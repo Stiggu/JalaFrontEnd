@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 export interface ITodoItems {
   text: string,
-  id: number,
+  done: boolean
 }
 
 @Component({
@@ -19,16 +19,13 @@ export class PokeListComponent {
     if(!this.itemToAdd) return;
     this.todoList.push({
       text: this.itemToAdd,
-      id: this.todoList.length,
+      done: false,
     });
     this.itemToAdd = '';
   }
 
-  completeItem(id: string){
-    const ele: HTMLElement | null = document.getElementById(id);
-    if(ele){
-      ele.style.textDecoration = "line-through"
-    }
+  completeItem(id: number){
+    this.todoList[id].done = !this.todoList[id].done;
   }
 
   deleteItem(id: number){
