@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import IPokemonData from "../../shared/IPokemonData";
 
 @Component({
   selector: 'app-poke-card',
   templateUrl: './poke-card.component.html',
   styleUrls: ['./poke-card.component.sass']
 })
-export class PokeCardComponent implements OnInit {
+export class PokeCardComponent {
+
+  @Input()
+  pokeData?: IPokemonData;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

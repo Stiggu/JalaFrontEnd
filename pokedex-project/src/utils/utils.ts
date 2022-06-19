@@ -152,7 +152,7 @@ export const pokemonColorMap = {
   "151": "#ffb6c3",
 }
 
-const dataPokemons = {
+export const dataPokemons = {
   "count": 1118,
   "next": "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20",
   "previous": null,
