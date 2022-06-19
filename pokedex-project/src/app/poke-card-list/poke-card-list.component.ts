@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {dataPokemons} from "../../utils/utils";
+import {Component, OnInit} from '@angular/core';
+import {dataPokemons, pokemonColorMap} from "../../utils/utils";
 import IPokemonData from "../../shared/IPokemonData";
 
 @Component({
@@ -7,11 +7,21 @@ import IPokemonData from "../../shared/IPokemonData";
   templateUrl: './poke-card-list.component.html',
   styleUrls: ['./poke-card-list.component.sass']
 })
-export class PokeCardListComponent {
+export class PokeCardListComponent implements OnInit{
 
   pokemonList: IPokemonData[] = [];
 
   constructor() {
-    this.pokemonList = dataPokemons.results;
+
+  }
+
+  ngOnInit() {
+    for(let x = 0; x < Object.keys(pokemonColorMap).length; x++){
+      this.pokemonList.push({
+        name: dataPokemons.results[x].name,
+        url: dataPokemons.results[x].url,
+        colour: Object.values(pokemonColorMap)[x],
+      })
+    }
   }
 }

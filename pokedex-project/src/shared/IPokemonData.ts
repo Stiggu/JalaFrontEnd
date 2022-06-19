@@ -1,4 +1,5 @@
 ﻿export default interface IPokemonData {
   name: string,
-  url: string
+  url: string,
+  colour: string,
 }

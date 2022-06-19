@@ -9,8 +9,12 @@ import IPokemonData from "../../shared/IPokemonData";
 export class PokeCardComponent {
 
   @Input()
-  pokeData?: IPokemonData;
+  pokeData: IPokemonData = {
+    colour: '',
+    name: '',
+    url: ''
+  };
 
-  constructor() { }
-
+  constructor() {
+  }
 }
