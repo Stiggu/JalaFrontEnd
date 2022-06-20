@@ -1,5 +1,11 @@
-<div [style.background-color]="pokeData.colour">
-  <p>{{pokeData.name}}</p>
-  <img [src]="pokeData.image" alt="Picture of a pokemon">
-  <p>{{pokeData.url}}</p>
+<div class="m-4 text-break p-3 text-black text-center rounded" [style.background-color]="pokeData.colour">
+  <div class="h2 text-capitalize">
+    {{pokeData.name}}
+  </div>
+  <div>
+    <img [src]="pokeData.image" alt="Picture of a pokemon">
+  </div>
+  <div class="text-black-50">
+    {{pokeData.url}}
+  </div>
 </div>

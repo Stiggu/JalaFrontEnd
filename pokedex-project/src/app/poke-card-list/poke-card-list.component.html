@@ -1,2 +1,7 @@
-<app-poke-card *ngFor="let pokemon of pokemonList; let i = index" [pokeData]="pokemon">
-</app-poke-card>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3" *ngFor="let pokemon of pokemonList; let i = index">
+      <app-poke-card  [pokeData]="pokemon"></app-poke-card>
+    </div>
+  </div>
+</div>
