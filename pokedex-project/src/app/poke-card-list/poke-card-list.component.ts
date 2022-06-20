@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {dataPokemons, pokemonColorMap} from "../../utils/utils";
+import {dataPokemons, getPokemonImageUri, pokemonColorMap} from "../../utils/utils";
 import IPokemonData from "../../shared/IPokemonData";
 
 @Component({
@@ -16,12 +16,14 @@ export class PokeCardListComponent implements OnInit{
   }
 
   ngOnInit() {
-    for(let x = 0; x < Object.keys(pokemonColorMap).length; x++){
+    for(let x = 0; x < dataPokemons.results.length; x++){
       this.pokemonList.push({
         name: dataPokemons.results[x].name,
         url: dataPokemons.results[x].url,
         colour: Object.values(pokemonColorMap)[x],
+        image: getPokemonImageUri(x)
       })
     }
+    console.log(this.pokemonList);
   }
 }

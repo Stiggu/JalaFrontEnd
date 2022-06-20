@@ -12,7 +12,8 @@ export class PokeCardComponent {
   pokeData: IPokemonData = {
     colour: '',
     name: '',
-    url: ''
+    url: '',
+    image: '',
   };
 
   constructor() {

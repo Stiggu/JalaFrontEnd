@@ -2,4 +2,5 @@
   name: string,
   url: string,
   colour: string,
+  image: string,
 }
