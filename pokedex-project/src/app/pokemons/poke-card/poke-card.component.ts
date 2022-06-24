@@ -14,6 +14,7 @@ export class PokeCardComponent {
     name: '',
     url: '',
     image: '',
+    id: '',
   };
 
   constructor() {

@@ -10,8 +10,16 @@ import IPokemonData from "../../core/interfaces/IPokemonData";
 export class PokeCardListComponent implements OnInit{
 
   pokemonList: IPokemonData[] = [];
+  search: string = '';
 
   constructor() {
+  }
+
+  filterPokemons(pokemons: IPokemonData[]): IPokemonData[]{
+    if(!this.search){
+      return this.pokemonList;
+    }
+    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search));
   }
 
   ngOnInit() {
@@ -21,7 +29,8 @@ export class PokeCardListComponent implements OnInit{
         name: dataPokemons.results[pokemon].name,
         url: dataPokemons.results[pokemon].url,
         colour: Object.values(pokemonColorMap)[pokemon],
-        image: getPokemonImageUri(pokemon)
+        image: getPokemonImageUri(pokemon),
+        id: ("00" + (pokemon + 1).toString()).slice(-3),
       })
     }
   }

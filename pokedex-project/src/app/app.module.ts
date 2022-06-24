@@ -3,16 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {PokeCardListComponent} from "./pokemons/poke-card-list/poke-card-list.component";
-import {PokeCardComponent} from "./pokemons/poke-card/poke-card.component";
+import {PokemonModule} from "./pokemons/pokemon.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokeCardListComponent,
-    PokeCardComponent
   ],
   imports: [
+    PokemonModule,
     BrowserModule,
     NgbModule
   ],
