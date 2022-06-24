@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import IPokemonData from "../../shared/IPokemonData";
+import IPokemonData from "../../utils/IPokemonData";
 
 @Component({
   selector: 'app-poke-card',
@@ -19,3 +19,4 @@ export class PokeCardComponent {
   constructor() {
   }
 }
+

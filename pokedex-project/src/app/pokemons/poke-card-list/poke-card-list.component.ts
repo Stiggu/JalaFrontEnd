@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {dataPokemons, getPokemonImageUri, pokemonColorMap} from "../../utils/utils";
-import IPokemonData from "../../shared/IPokemonData";
+import IPokemonData from "../../utils/IPokemonData";
 
 @Component({
   selector: 'app-poke-card-list',
