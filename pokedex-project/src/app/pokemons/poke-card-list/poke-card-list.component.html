@@ -5,9 +5,14 @@
       <input type="text" [(ngModel)]="search" [value]="search">
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-3" *ngFor="let pokemon of filterPokemons(pokemonList); let i = index">
+  <div class="row" *ngIf="filterPokemons(pokemonList).length > 0; else pokeListEmpty">
+    <div class="col-sm-12 col-md-6 col-lg-2" *ngFor="let pokemon of filterPokemons(pokemonList); let i = index">
       <app-poke-card  [pokeData]="pokemon"></app-poke-card>
     </div>
   </div>
+  <ng-template #pokeListEmpty>
+    <div class="row">
+      <empty-search></empty-search>
+    </div>
+  </ng-template>
 </div>
