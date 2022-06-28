@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {dataPokemons, getPokemonImageUri, pokemonColorMap} from "../../utils/utils";
+import {dataPokemons, pokemonColorMap} from "../../utils/utils";
 import IPokemonData from "../../core/interfaces/IPokemonData";
 import {PokemonService} from "../services/pokemon.service";
 
@@ -12,6 +12,7 @@ export class PokeCardListComponent implements OnInit{
 
   pokemonList: IPokemonData[] = [];
   search: string = '';
+  listSize = 10;
 
   constructor(private pokemonService: PokemonService) {
   }
@@ -20,11 +21,16 @@ export class PokeCardListComponent implements OnInit{
     this.search = value;
   }
 
+  listSizeChanged(value: number){
+    console.log(value)
+    this.listSize= value;
+  }
+
   filterPokemons(pokemons: IPokemonData[]): IPokemonData[]{
     if(!this.search){
-      return this.pokemonList;
+      return this.pokemonList.slice(0,this.listSize);
     }
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search));
+    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(0,this.listSize);
   }
 
   ngOnInit() {
