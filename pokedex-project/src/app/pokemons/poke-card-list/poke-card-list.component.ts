@@ -16,6 +16,10 @@ export class PokeCardListComponent implements OnInit{
   constructor(private pokemonService: PokemonService) {
   }
 
+  searchChanged(value: string){
+    this.search = value;
+  }
+
   filterPokemons(pokemons: IPokemonData[]): IPokemonData[]{
     if(!this.search){
       return this.pokemonList;

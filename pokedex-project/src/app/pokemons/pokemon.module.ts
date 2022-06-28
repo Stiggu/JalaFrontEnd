@@ -6,6 +6,9 @@ import {AppComponent} from "../app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {EmptySearchComponent} from "./empty-search/empty-search.component";
 import {HttpClientModule} from "@angular/common/http";
+import {AppModule} from "../app.module";
+import {SearchBarComponent} from "../core/components/search-bar/search-bar.component";
+import {CoreModule} from "../core/core.module";
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CoreModule,
   ],
   exports: [
     PokeCardListComponent,
