@@ -8,13 +8,12 @@
         <button type="button" class="btn btn-outline-success" ngbDropdownToggle>View Options
         </button>
 
-        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-          <div class="mb-3">
-            <div class="m-2">
-              <label for="list-size">Offset:</label>
-              <input id="list-size" type="number" class="form-control" [ngModel]="listSize" (ngModelChange)="listSizeChanged($event)">
-              <button type="button" class="btn btn-outline-success" (click)="offsetChanged()">Apply</button>
-            </div>
+        <div class="bg-dark text-white" ngbDropdownMenu aria-labelledby="dropdownForm1">
+          <div class="m-2 mb-3">
+            <label for="list-size" class="lead">Offset:</label>
+            <input id="list-size" type="number" class="form-control" [ngModel]="listSize"
+                   (ngModelChange)="listSizeChanged($event)">
+            <button type="button" class="btn btn-outline-success mt-3" (click)="offsetChanged()">Apply</button>
           </div>
         </div>
       </div>
