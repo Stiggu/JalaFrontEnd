@@ -1,21 +1,20 @@
 <div class="container-fluid">
-  <div class="row align-items-center">
+  <div class="row align-items-end">
     <div class="offset-4 col-2">
       <app-search-bar (searchChanged)="searchChanged($event)"></app-search-bar>
     </div>
     <div class="col-2">
       <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-success" ngbDropdownToggle *ngIf="listSize > 0; else notShowing">Showing 1 to {{listSize}} pokemons
+        <button type="button" class="btn btn-outline-success" ngbDropdownToggle>View Options
         </button>
-        <ng-template #notShowing>
-          <button type="button" class="btn btn-outline-success" ngbDropdownToggle>Not showing any pokemons
-          </button>
-        </ng-template>
+
         <div ngbDropdownMenu aria-labelledby="dropdownForm1">
           <div class="mb-3">
-            <label for="list-size">List size:</label>
-            <input id="list-size" type="number" class="form-control" [ngModel]="listSize"
-                   (ngModelChange)="listSizeChanged($event)">
+            <div class="m-2">
+              <label for="list-size">Offset:</label>
+              <input id="list-size" type="number" class="form-control" [ngModel]="listSize" (ngModelChange)="listSizeChanged($event)">
+              <button type="button" class="btn btn-outline-success" (click)="offsetChanged()">Apply</button>
+            </div>
           </div>
         </div>
       </div>

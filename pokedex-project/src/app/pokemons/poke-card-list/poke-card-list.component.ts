@@ -12,7 +12,8 @@ export class PokeCardListComponent implements OnInit{
 
   pokemonList: IPokemonData[] = [];
   search: string = '';
-  listSize = 10;
+  listSize = 0;
+  offset = 0;
 
   constructor(private pokemonService: PokemonService) {
   }
@@ -22,27 +23,21 @@ export class PokeCardListComponent implements OnInit{
   }
 
   listSizeChanged(value: number){
-    console.log(value)
-    this.listSize= value;
+    this.listSize = value;
+  }
+
+  offsetChanged() {
+    this.offset = this.listSize;
   }
 
   filterPokemons(pokemons: IPokemonData[]): IPokemonData[]{
     if(!this.search){
-      return this.pokemonList.slice(0,this.listSize);
+      return this.pokemonList.slice(this.offset,this.offset + 50);
     }
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(0,this.listSize);
+    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(this.offset,this.offset);
   }
 
   ngOnInit() {
-    const pokemons = dataPokemons.results;
-    for(let pokemon = 0; pokemon < pokemons.length; pokemon++){
-      this.pokemonList.push({
-        name: dataPokemons.results[pokemon].name,
-        url: dataPokemons.results[pokemon].url,
-        colour: Object.values(pokemonColorMap)[pokemon],
-        image: this.pokemonService.getPokemonImageUri(pokemon),
-        id: ("00" + (pokemon + 1).toString()).slice(-3),
-      })
-    }
+    this.pokemonList = this.pokemonService.getPokemonMockData();
   }
 }
