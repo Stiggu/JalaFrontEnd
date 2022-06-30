@@ -8,11 +8,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "../core/core.module";
 import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {PokemonRoutingModule} from "./pokemon-routing.module";
+import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
 
 @NgModule({
   declarations: [
     PokeCardListComponent,
     PokeCardComponent,
+    PokemonProfileComponent
   ],
   imports: [
     BrowserModule,
