@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import IPokemonData from "../../core/interfaces/IPokemonData";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-poke-card',
@@ -7,6 +8,9 @@ import IPokemonData from "../../core/interfaces/IPokemonData";
   styleUrls: ['./poke-card.component.sass']
 })
 export class PokeCardComponent {
+
+  constructor(private router: Router) {
+  }
 
   @Input()
   pokeData: IPokemonData = {
@@ -17,7 +21,9 @@ export class PokeCardComponent {
     id: '',
   };
 
-  constructor() {
+  goToProfile(){
+    this.router.navigate([`/pokedex/${this.pokeData.id}`]);
+    console.log('a');
   }
 }
 

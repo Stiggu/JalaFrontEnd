@@ -26,6 +26,7 @@ import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.compone
   ],
   exports: [
     PokeCardListComponent,
+    PokemonProfileComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

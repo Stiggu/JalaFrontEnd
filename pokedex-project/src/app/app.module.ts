@@ -6,17 +6,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {PokemonModule} from "./pokemons/pokemon.module";
 import {SearchBarComponent} from "./core/components/search-bar/search-bar.component";
 import {FormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
-  imports: [
-    PokemonModule,
-    BrowserModule,
-    NgbModule,
-    FormsModule
-  ],
+    imports: [
+        PokemonModule,
+        BrowserModule,
+        NgbModule,
+        FormsModule,
+        RouterModule
+    ],
   providers: [],
   exports: [
   ],
