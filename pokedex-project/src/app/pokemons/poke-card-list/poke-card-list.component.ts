@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {dataPokemons, pokemonColorMap} from "../../utils/utils";
 import IPokemonData from "../../core/interfaces/IPokemonData";
 import {PokemonService} from "../services/pokemon.service";
 
@@ -8,7 +7,7 @@ import {PokemonService} from "../services/pokemon.service";
   templateUrl: './poke-card-list.component.html',
   styleUrls: ['./poke-card-list.component.sass']
 })
-export class PokeCardListComponent implements OnInit{
+export class PokeCardListComponent implements OnInit {
 
   pokemonList: IPokemonData[] = [];
   search: string = '';
@@ -18,11 +17,11 @@ export class PokeCardListComponent implements OnInit{
   constructor(private pokemonService: PokemonService) {
   }
 
-  searchChanged(value: string){
+  searchChanged(value: string) {
     this.search = value;
   }
 
-  listSizeChanged(value: number){
+  listSizeChanged(value: number) {
     this.listSize = value;
   }
 
@@ -30,11 +29,11 @@ export class PokeCardListComponent implements OnInit{
     this.offset = this.listSize;
   }
 
-  filterPokemons(pokemons: IPokemonData[]): IPokemonData[]{
-    if(!this.search){
-      return this.pokemonList.slice(this.offset,this.offset + 50);
+  filterPokemons(pokemons: IPokemonData[]): IPokemonData[] {
+    if (!this.search) {
+      return this.pokemonList.slice(this.offset, this.offset + 50);
     }
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(this.offset,this.offset);
+    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(this.offset, this.offset + 50);
   }
 
   ngOnInit() {

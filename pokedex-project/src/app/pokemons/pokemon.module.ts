@@ -7,6 +7,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "../core/core.module";
 import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
+import {PokemonRoutingModule} from "./pokemon-routing.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
     HttpClientModule,
     CoreModule,
     NgbDropdownModule,
+    PokemonRoutingModule,
   ],
   exports: [
     PokeCardListComponent,
