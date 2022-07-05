@@ -27,12 +27,12 @@ export class PokemonService {
       name: request.data.name,
       id: id,
       stats: {
-        hp: request.data.name.hp,
-        attack: request.data.name.attack,
-        defense: request.data.name.defense,
-        specialAttack: request.data.name.specialAttack,
-        specialDefense: request.data.name.specialDefense,
-        speed: request.data.name.speed
+        hp: request.data.stats[0].base_stat,
+        attack: request.data.stats[1].base_stat,
+        defense: request.data.stats[2].base_stat,
+        specialAttack: request.data.stats[3].base_stat,
+        specialDefense: request.data.stats[4].base_stat,
+        speed: request.data.stats[5].base_stat
       },
       species: {
         url: request.data.species.url,
@@ -62,7 +62,7 @@ export class PokemonService {
         species: {
           url: '',
           colour: Object.values(pokemonColorMap)[pokemon],
-        }
+        },
       })
     }
     return pokemonList;
