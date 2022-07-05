@@ -9,6 +9,7 @@ import {CoreModule} from "../core/core.module";
 import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {PokemonRoutingModule} from "./pokemon-routing.module";
 import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.compone
     CoreModule,
     NgbDropdownModule,
     PokemonRoutingModule,
+    NgChartsModule
   ],
   exports: [
     PokeCardListComponent,
