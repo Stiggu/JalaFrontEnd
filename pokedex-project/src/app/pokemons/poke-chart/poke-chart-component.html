@@ -1,0 +1,7 @@
+﻿<div style="display: block" *ngIf="pokemon.stats">
+  <canvas baseChart
+          [data]="radarChartData"
+          [options]="radarChartOptions"
+          type="polarArea">
+  </canvas>
+</div>

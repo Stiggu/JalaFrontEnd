@@ -1,25 +1,19 @@
 ﻿<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-3 align-self-center">
-
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" [src]="pokemon.image" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{pokemon.name}}</h5>
           <p class="card-text">{{pokemon.species?.description}}</p>
         </div>
+        <div (click)="goBack()" class="text-white btn btn-success">Go back</div>
+
       </div>
+    </div>
 
-      <div style="display: block">
-        <canvas baseChart
-                [data]="radarChartData"
-                [options]="radarChartOptions"
-
-                [type]="radarChartType">
-        </canvas>
-      </div>
-
-      <div (click)="goBack()" class="text-white btn btn-outline-success">Go back</div>
+    <div class="col-12 d-flex justify-content-center">
+      <poke-chart [pokemon]="pokemon"></poke-chart>
     </div>
   </div>
 </div>

@@ -29,9 +29,9 @@ export class PokemonService {
       stats: {
         hp: request.data.stats[0].base_stat,
         attack: request.data.stats[1].base_stat,
-        defense: request.data.stats[2].base_stat,
+        defence: request.data.stats[2].base_stat,
         specialAttack: request.data.stats[3].base_stat,
-        specialDefense: request.data.stats[4].base_stat,
+        specialDefence: request.data.stats[4].base_stat,
         speed: request.data.stats[5].base_stat
       },
       species: {
@@ -41,7 +41,7 @@ export class PokemonService {
     };
   };
 
-  async getPokemonSpecies(url: string) :Promise<IPokemonSpecies> {
+  async getPokemonSpecies(url: string): Promise<IPokemonSpecies> {
     const request = await axios(url);
     return {
       url: url,
@@ -55,6 +55,7 @@ export class PokemonService {
     const pokemonList: IPokemonData[] = [];
     for (let pokemon = 0; pokemon < pokemons.length; pokemon++) {
       pokemonList.push({
+        stats: {attack: 0, defence: 0, hp: 0, specialAttack: 0, specialDefence: 0, speed: 0},
         name: dataPokemons.results[pokemon].name,
         url: dataPokemons.results[pokemon].url,
         image: this.getPokemonImageUri(pokemon),
@@ -62,7 +63,7 @@ export class PokemonService {
         species: {
           url: '',
           colour: Object.values(pokemonColorMap)[pokemon],
-        },
+        }
       })
     }
     return pokemonList;

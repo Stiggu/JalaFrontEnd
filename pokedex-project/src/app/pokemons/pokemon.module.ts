@@ -10,12 +10,14 @@ import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {PokemonRoutingModule} from "./pokemon-routing.module";
 import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
 import {NgChartsModule} from "ng2-charts";
+import {PokeChartComponent} from "./poke-chart/poke-chart.component";
 
 @NgModule({
   declarations: [
     PokeCardListComponent,
     PokeCardComponent,
-    PokemonProfileComponent
+    PokemonProfileComponent,
+    PokeChartComponent
   ],
   imports: [
     BrowserModule,

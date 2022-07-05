@@ -5,12 +5,12 @@ export default interface IPokemonData {
   url: string,
   image: string,
   id: number,
-  stats?: {
+  stats: {
     hp: number,
     attack: number,
-    defense: number,
+    defence: number,
     specialAttack: number,
-    specialDefense: number,
+    specialDefence: number,
     speed: number
   },
   species?: IPokemonSpecies
