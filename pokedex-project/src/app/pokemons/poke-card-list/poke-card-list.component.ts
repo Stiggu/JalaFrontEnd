@@ -33,7 +33,7 @@ export class PokeCardListComponent implements OnInit {
     if (!this.search) {
       return this.pokemonList.slice(this.offset, this.offset + 50);
     }
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search) || pokemon.id.toLowerCase().includes(this.search)).slice(this.offset, this.offset + 50);
+    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search)).slice(this.offset, this.offset + 50);
   }
 
   ngOnInit() {

@@ -13,17 +13,10 @@ export class PokeCardComponent {
   }
 
   @Input()
-  pokeData: IPokemonData = {
-    colour: '',
-    name: '',
-    url: '',
-    image: '',
-    id: '',
-  };
+  pokeData!: IPokemonData;
 
   goToProfile(){
     this.router.navigate([`/pokedex/${this.pokeData.id}`]);
-    console.log('a');
   }
 }
 
