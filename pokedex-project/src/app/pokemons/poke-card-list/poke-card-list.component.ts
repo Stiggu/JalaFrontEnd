@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import IPokemonData from "../../core/interfaces/IPokemonData";
+import PokemonListData from "../../core/interfaces/PokemonListData";
 import {PokemonService} from "../services/pokemon.service";
 import {PokemonsResolver} from "../pokemons.resolver";
 import {ActivatedRoute} from "@angular/router";
@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PokeCardListComponent implements OnInit {
 
-  pokemonList: IPokemonData[] = [];
+  pokemonList: PokemonListData[] = [];
   search: string = '';
   listSize = 0;
   offset = 0;
@@ -33,7 +33,7 @@ export class PokeCardListComponent implements OnInit {
     this.offset = this.listSize;
   }
 
-  filterPokemons(pokemons: IPokemonData[]): IPokemonData[] {
+  filterPokemons(pokemons: PokemonListData[]): PokemonListData[] {
     if (!this.search) {
       return this.pokemonList.slice(this.offset, this.offset + 50);
     }

@@ -1,12 +1,70 @@
 ﻿<div class="row mt-5">
   <div class="col-6 d-flex justify-content-center">
     <div class="text-white text-center">
-      <div class="text-capitalize h1">{{pokemon.name}} <span [style.background-color]="pokemon.species.colour">#{{('00' + (pokemon.id)).slice(-3)}}</span></div>
-      <div >
+      <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
+        {{pokemon.name}}
+
+        <h3 class="m-3">
+          <div class="badge" [style.background-color]="pokemon.species.colour">
+            #{{('00' + (pokemon.id)).slice(-3)}}
+          </div>
+        </h3>
+
+        <span
+          [style.background-color]="pokemon.species.colour">
+        </span>
+      </div>
+      <div>
         <img class="w-50" [src]="pokemon.image" alt="Card image cap">
       </div>
       <p class="h4 text-info">{{pokemon.species?.description}}</p>
     </div>
+  </div>
+
+  <div class="col-6 text-center text-white">
+    <!--    Info panel   -->
+    <div class="h1">
+      Information
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-6 align-self-center">
+          <div>
+            Types
+          </div>
+          <div class="d-flex justify-content-center">
+            <div *ngFor="let type of pokemon.types" class="m-2">
+              <h4>
+                <div class="text-uppercase badge bg-light text-dark">
+                  {{type.name}}
+                </div>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="">Weight</div>
+          <h4 class="m-2">
+            <div class="text-uppercase badge bg-light text-dark">
+              {{pokemon.weight}}
+            </div>
+          </h4>
+        </div>
+        <div class="col-1">
+          <div class="">Height</div>
+          <h4 class="m-2">
+            <div class="text-uppercase badge bg-light text-dark">
+              {{pokemon.height}}
+            </div>
+          </h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+
   </div>
 
   <div class="col-6">

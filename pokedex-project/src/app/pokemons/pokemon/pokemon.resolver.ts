@@ -1,17 +1,17 @@
 ﻿import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {PokemonService} from "../services/pokemon.service";
-import IPokemonData from "../../core/interfaces/IPokemonData";
 import {Observable} from "rxjs";
+import PokemonProfile from "../../core/interfaces/pokemonProfile";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PokemonResolver implements Resolve<IPokemonData> {
-  constructor(private pokemonService: PokemonService) {
+export class PokemonResolver implements Resolve<PokemonProfile> {
+  constructor() {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPokemonData> | Promise<IPokemonData> | IPokemonData {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PokemonProfile> | Promise<PokemonProfile> | PokemonProfile {
     const id = route.paramMap.get('id') || "1";
     // return this.pokemonService.getPokemon(parseInt(id));
     return {
@@ -19,6 +19,8 @@ export class PokemonResolver implements Resolve<IPokemonData> {
       "url": "https://pokeapi.co/api/v2/pokemon/1",
       "name": "bulbasaur",
       "id": 1,
+      "weight": 69,
+      "height": 7,
       "stats": {
         "hp": 45,
         "attack": 49,
@@ -30,8 +32,20 @@ export class PokemonResolver implements Resolve<IPokemonData> {
       "species": {
         "url": "https://pokeapi.co/api/v2/pokemon-species/1/",
         "colour": "green",
-        "description": "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON."
-      }
+        "description": "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.",
+        "habitat": "grasslands",
+        "generation": "generation-i",
+      },
+      "types": [
+        {
+          "name": "grass",
+          "url": "https://pokeapi.co/api/v2/type/12/"
+        },
+        {
+          "name": "poison",
+          "url": "https://pokeapi.co/api/v2/type/4/"
+        }
+      ],
     }
   }
 }

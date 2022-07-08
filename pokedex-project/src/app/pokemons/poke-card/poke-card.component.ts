@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import IPokemonData from "../../core/interfaces/IPokemonData";
+import PokemonListData from "../../core/interfaces/PokemonListData";
 import {Router} from "@angular/router";
 
 @Component({
@@ -13,7 +13,7 @@ export class PokeCardComponent {
   }
 
   @Input()
-  pokeData!: IPokemonData;
+  pokeData!: PokemonListData;
 
   goToProfile(){
     this.router.navigate([`/pokedex/${this.pokeData.id}`]);

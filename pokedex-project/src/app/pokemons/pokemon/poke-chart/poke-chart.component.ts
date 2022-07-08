@@ -1,5 +1,5 @@
 ﻿import {Component, Input} from "@angular/core";
-import IPokemonData from "../../core/interfaces/IPokemonData";
+import PokemonProfile from "../../../core/interfaces/pokemonProfile";
 
 @Component({
   selector: 'poke-chart',
@@ -8,7 +8,7 @@ import IPokemonData from "../../core/interfaces/IPokemonData";
 })
 export class PokeChartComponent {
   @Input()
-  pokemon!: IPokemonData;
+  pokemon!: PokemonProfile;
   constructor() {
   }
 

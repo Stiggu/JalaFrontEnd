@@ -1,9 +1,10 @@
 ﻿import {Component, OnInit} from "@angular/core";
 import {Location} from "@angular/common";
 import {PokemonService} from "../../services/pokemon.service";
-import IPokemonData from "../../../core/interfaces/IPokemonData";
+import PokemonListData from "../../../core/interfaces/PokemonListData";
 import {ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot} from "@angular/router";
 import {ChartConfiguration, ChartData, ChartType} from "chart.js";
+import PokemonProfile from "../../../core/interfaces/pokemonProfile";
 
 @Component({
   selector: 'pokemon-profile',
@@ -12,7 +13,7 @@ import {ChartConfiguration, ChartData, ChartType} from "chart.js";
 export class PokemonProfileComponent implements OnInit {
   id: number = 1;
   fields: any;
-  pokemon!: IPokemonData;
+  pokemon!: PokemonProfile;
 
   constructor(private location: Location, private pokemonService: PokemonService, private route: ActivatedRoute) {
   }

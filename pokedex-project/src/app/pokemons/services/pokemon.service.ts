@@ -1,10 +1,12 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import IPokemonData from "../../core/interfaces/IPokemonData";
+import PokemonListData from "../../core/interfaces/PokemonListData";
 import {dataPokemons, pokemonColorMap} from "../../utils/utils";
-import axios from "axios";
-import IPokemonSpecies from "../../core/interfaces/IPokemonSpecies";
+import axios, {AxiosPromise} from "axios";
+import PokemonSpecies from "../../core/interfaces/PokemonSpecies";
+import PokemonProfile from "../../core/interfaces/pokemonProfile";
+import PokemonStats from "../../core/interfaces/pokemonStats";
 
 @Injectable({
   providedIn: 'root',
@@ -16,56 +18,57 @@ export class PokemonService {
   }
 
   getPokemonList(offset: number = 0, limit: number = 25) {
-    return this.http.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{ results: IPokemonData[] }>
+    return this.http.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{ results: PokemonListData[] }>
   }
 
-  async getPokemon(id: number): Promise<IPokemonData> {
-    const request = await axios(`${this.api}/pokemon/${id}`);
-    const species = await axios(`${request.data.species.url}`)
+  async getPokemon(id: number): Promise<PokemonProfile> {
+    const mainData = await axios(`${this.api}/pokemon/${id}`);
+    const species = await this.getPokemonSpecies(mainData.data.species.url);
     return {
-      image: request.data.sprites.front_default,
+      image: mainData.data.sprites.front_default,
       url: `${this.api}/pokemon/${id}`,
-      name: request.data.name,
+      name: mainData.data.name,
       id: id,
-      stats: {
-        hp: request.data.stats[0].base_stat,
-        attack: request.data.stats[1].base_stat,
-        defence: request.data.stats[2].base_stat,
-        specialAttack: request.data.stats[3].base_stat,
-        specialDefence: request.data.stats[4].base_stat,
-        speed: request.data.stats[5].base_stat
-      },
-      species: {
-        url: request.data.species.url,
-        colour: species.data.color.name,
-        description: species.data.flavor_text_entries[0].flavor_text
-      }
+      height: mainData.data.height,
+      weight: mainData.data.weight,
+      stats: this.normalizeStats(mainData),
+      species: species,
+      types: [...mainData.data.types.type],
     };
   };
 
-  async getPokemonSpecies(url: string): Promise<IPokemonSpecies> {
-    const request = await axios(url);
+  normalizeStats(mainData: any): PokemonStats {
     return {
-      url: url,
-      colour: request.data.color.name,
-      description: request.data.flavor_text_entries[0].flavor_text,
+      hp: mainData.data.stats[0].base_stat,
+      attack: mainData.data.stats[1].base_stat,
+      defence: mainData.data.stats[2].base_stat,
+      specialAttack: mainData.data.stats[3].base_stat,
+      specialDefence: mainData.data.stats[4].base_stat,
+      speed: mainData.data.stats[5].base_stat
     }
   }
 
-  getPokemonMockData(): IPokemonData[] {
+  async getPokemonSpecies(url: string): Promise<PokemonSpecies> {
+    const species = await axios(url);
+    return {
+      url: url,
+      colour: species.data.color.name,
+      description: species.data.flavor_text_entries[0].flavor_text,
+      habitat: species.data.habitat.name,
+      generation: species.data.generation.name,
+    }
+  }
+
+  getPokemonMockData(): PokemonListData[] {
     const pokemons = dataPokemons.results;
-    const pokemonList: IPokemonData[] = [];
+    const pokemonList: PokemonListData[] = [];
     for (let pokemon = 0; pokemon < pokemons.length; pokemon++) {
       pokemonList.push({
-        stats: {attack: 0, defence: 0, hp: 0, specialAttack: 0, specialDefence: 0, speed: 0},
         name: dataPokemons.results[pokemon].name,
         url: dataPokemons.results[pokemon].url,
         image: this.getPokemonImageUri(pokemon),
         id: pokemon + 1,
-        species: {
-          url: '',
-          colour: Object.values(pokemonColorMap)[pokemon],
-        }
+        color: Object.values(pokemonColorMap)[pokemon]
       })
     }
     return pokemonList;
