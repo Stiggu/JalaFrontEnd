@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import IPokemonData from "../../core/interfaces/IPokemonData";
 import {PokemonService} from "../services/pokemon.service";
+import {PokemonsResolver} from "../pokemons.resolver";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-poke-card-list',
@@ -14,7 +16,9 @@ export class PokeCardListComponent implements OnInit {
   listSize = 0;
   offset = 0;
 
-  constructor(private pokemonService: PokemonService) {
+  constructor(
+    private pokemonService: PokemonService,
+    private activatedRoute: ActivatedRoute) {
   }
 
   searchChanged(value: string) {
@@ -37,6 +41,8 @@ export class PokeCardListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pokemonList = this.pokemonService.getPokemonMockData();
+    this.activatedRoute.data.subscribe(({pokemons}) => {
+      this.pokemonList = pokemons;
+    })
   }
 }

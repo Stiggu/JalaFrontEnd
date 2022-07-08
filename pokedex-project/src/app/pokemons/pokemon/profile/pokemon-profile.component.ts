@@ -23,31 +23,10 @@ export class PokemonProfileComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    const _id = this.route.snapshot.paramMap.get('id');
-    if (_id) {
-      this.id = parseInt(_id);
-    }
-    // this.pokemon = await this.pokemonService.getPokemon(this.id);
-    console.log(this.pokemon)
-
-    this.pokemon = {
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "url": "https://pokeapi.co/api/v2/pokemon/1",
-      "name": "bulbasaur",
-      "id": 1,
-      "stats": {
-        "hp": 45,
-        "attack": 49,
-        "defence": 49,
-        "specialAttack": 65,
-        "specialDefence": 65,
-        "speed": 45
-      },
-      "species": {
-        "url": "https://pokeapi.co/api/v2/pokemon-species/1/",
-        "colour": "green",
-        "description": "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON."
-      }
-    }
+    const _id = this.route.snapshot.paramMap.get('id') || "1";
+    this.id = parseInt(_id);
+    this.route.data.subscribe(({pokemon}) => {
+      this.pokemon = pokemon;
+    })
   }
 }
