@@ -21,6 +21,7 @@ export class PokemonService {
 
   async getPokemon(id: number): Promise<IPokemonData> {
     const request = await axios(`${this.api}/pokemon/${id}`);
+    const species = await axios(`${request.data.species.url}`)
     return {
       image: request.data.sprites.front_default,
       url: `${this.api}/pokemon/${id}`,
@@ -36,7 +37,8 @@ export class PokemonService {
       },
       species: {
         url: request.data.species.url,
-        colour: '#fff',
+        colour: species.data.color.name,
+        description: species.data.flavor_text_entries[0].flavor_text
       }
     };
   };

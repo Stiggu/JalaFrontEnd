@@ -1,13 +1,10 @@
-<div class="m-4 text-break p-3 text-black text-center rounded"
+<div class="text-break text-black text-center rounded h-100"
      [style.background-color]="pokeData.species?.colour"
      (click)="goToProfile()">
   <div class="h2 text-capitalize">
-    {{pokeData.name}}
+    {{pokeData.name}} #{{('00' + (pokeData.id)).slice(-3)}}
   </div>
   <div>
     <img class="img-fluid" [src]="pokeData.image" alt="Picture of a pokemon">
-  </div>
-  <div class="text-black text-end h5">
-    #{{('00' + (pokeData.id)).slice(-3)}}
   </div>
 </div>

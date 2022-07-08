@@ -13,5 +13,5 @@ export default interface IPokemonData {
     specialDefence: number,
     speed: number
   },
-  species?: IPokemonSpecies
+  species: IPokemonSpecies
 }

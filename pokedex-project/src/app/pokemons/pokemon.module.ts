@@ -6,7 +6,7 @@ import {AppComponent} from "../app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "../core/core.module";
-import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDropdownModule, NgbProgressbarModule} from "@ng-bootstrap/ng-bootstrap";
 import {PokemonRoutingModule} from "./pokemon-routing.module";
 import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
 import {NgChartsModule} from "ng2-charts";
@@ -26,7 +26,8 @@ import {PokeChartComponent} from "./poke-chart/poke-chart.component";
     CoreModule,
     NgbDropdownModule,
     PokemonRoutingModule,
-    NgChartsModule
+    NgChartsModule,
+    NgbProgressbarModule
   ],
   exports: [
     PokeCardListComponent,

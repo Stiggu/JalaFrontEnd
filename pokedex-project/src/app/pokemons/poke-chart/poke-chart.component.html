@@ -1,0 +1,9 @@
+﻿<div *ngIf="pokemon">
+  <div class="h1 text-center text-white">Stats</div>
+  <div class="m-4" *ngFor="let stat of pokemon.stats | keyvalue; index as i">
+    <span class="text-white text-capitalize h5">{{stat.key}}</span>
+    <div class="progress">
+      <div class="progress-bar" [ngClass]="[stat.key]" style="width:{{stat.value}}%"></div>
+    </div>
+  </div>
+</div>

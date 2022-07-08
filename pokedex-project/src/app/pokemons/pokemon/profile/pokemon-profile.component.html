@@ -1,20 +1,16 @@
-﻿<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-center">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" [src]="pokemon.image" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{pokemon.name}}</h5>
-          <p class="card-text">{{pokemon.species?.description}}</p>
-        </div>
-        <div (click)="goBack()" class="text-white btn btn-success">Go back</div>
+﻿<div class="row">
+  <div class="col-6 d-flex justify-content-center">
+    <div class="text-white text-center">
+      <div class="text-capitalize h1">{{pokemon.name}} #{{('00' + (pokemon.id)).slice(-3)}}</div>
+      <img class="w-50" [src]="pokemon.image" alt="Card image cap">
+      <p class="card-text">{{pokemon.species?.description}}</p>
+      <div (click)="goBack()" class="text-white btn btn-success">Go back</div>
 
-      </div>
     </div>
+  </div>
 
-    <div class="col-12 d-flex justify-content-center">
-      <poke-chart [pokemon]="pokemon"></poke-chart>
-    </div>
+  <div class="col-6">
+    <poke-chart [pokemon]="pokemon"></poke-chart>
   </div>
 </div>
 

@@ -22,31 +22,32 @@ export class PokemonProfileComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-/*    const _id = this.route.snapshot.paramMap.get('id');
+
+    const _id = this.route.snapshot.paramMap.get('id');
     if (_id) {
       this.id = parseInt(_id);
     }
-    console.log(_id);
-    this.pokemon = await this.pokemonService.getPokemon(this.id);
-    console.log(this.pokemon)*/
+    // this.pokemon = await this.pokemonService.getPokemon(this.id);
+    console.log(this.pokemon)
+
     this.pokemon = {
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-      "url": "https://pokeapi.co/api/v2/pokemon/5",
-      "name": "charmeleon",
-      "id": 5,
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "url": "https://pokeapi.co/api/v2/pokemon/1",
+      "name": "bulbasaur",
+      "id": 1,
       "stats": {
-        "hp": 58,
-        "attack": 64,
-        "defence": 58,
-        "specialAttack": 80,
+        "hp": 45,
+        "attack": 49,
+        "defence": 49,
+        "specialAttack": 65,
         "specialDefence": 65,
-        "speed": 80
+        "speed": 45
       },
       "species": {
-        "url": "https://pokeapi.co/api/v2/pokemon-species/5/",
-        "colour": "#fff"
+        "url": "https://pokeapi.co/api/v2/pokemon-species/1/",
+        "colour": "green",
+        "description": "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON."
       }
     }
-
   }
 }
