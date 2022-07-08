@@ -11,6 +11,7 @@ import {PokemonRoutingModule} from "./pokemon-routing.module";
 import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
 import {NgChartsModule} from "ng2-charts";
 import {PokeChartComponent} from "./poke-chart/poke-chart.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -20,21 +21,15 @@ import {PokeChartComponent} from "./poke-chart/poke-chart.component";
     PokeChartComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
+    CommonModule,
     CoreModule,
-    NgbDropdownModule,
+    FormsModule,
     PokemonRoutingModule,
-    NgChartsModule,
-    NgbProgressbarModule
   ],
-  exports: [
-    PokeCardListComponent,
-    PokemonProfileComponent
-  ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
 
-export class PokemonModule { }
+export class PokemonModule {
+}

@@ -7,24 +7,19 @@ import {PokemonResolver} from "./pokemon/pokemon.resolver";
 
 const routes: Routes = [
   {
-    path: 'pokedex',
+    path: '',
     component: PokeCardListComponent,
     resolve: {pokemons: PokemonsResolver}
   },
   {
-    path: 'pokedex/:id',
+    path: ':id',
     component: PokemonProfileComponent,
     resolve: {pokemon: PokemonResolver}
-  },
-  {
-    path: '',
-    redirectTo: '/pokedex',
-    pathMatch: 'full',
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class PokemonRoutingModule {

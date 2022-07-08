@@ -2,6 +2,7 @@
 import {SearchBarComponent} from "./components/search-bar/search-bar.component";
 import {FormsModule} from "@angular/forms";
 import {EmptySearchComponent} from "./components/empty-search/empty-search.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -9,8 +10,8 @@ import {EmptySearchComponent} from "./components/empty-search/empty-search.compo
     EmptySearchComponent
   ],
   imports: [
-    FormsModule
-
+    FormsModule,
+    CommonModule,
   ],
   exports: [
     SearchBarComponent,
