@@ -1,0 +1,7 @@
+﻿<div class="row">
+  <div class="col-3" *ngFor="let evolution of evolutionData; index as i">
+    <div class="h1">Evolution {{i + 1}}</div>
+    <img [src]="evolution.image" alt="Image of a pokemon">
+    <div class="h3 text-white">{{evolution.name}}</div>
+  </div>
+</div>

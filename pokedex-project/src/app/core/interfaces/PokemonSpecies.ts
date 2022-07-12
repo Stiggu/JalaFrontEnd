@@ -4,4 +4,5 @@
   description: string,
   habitat: string,
   generation: string,
+  evolutionChain: string
 }

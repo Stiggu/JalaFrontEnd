@@ -9,13 +9,15 @@ import {PokemonRoutingModule} from "./pokemon-routing.module";
 import {PokemonProfileComponent} from "./pokemon/profile/pokemon-profile.component";
 import {CommonModule} from "@angular/common";
 import {PokeChartComponent} from "./pokemon/poke-chart/poke-chart.component";
+import {PokeEvolutionComponent} from "./pokemon/poke-evolutions/poke-evolution.component";
 
 @NgModule({
   declarations: [
     PokeCardListComponent,
     PokeCardComponent,
     PokemonProfileComponent,
-    PokeChartComponent
+    PokeChartComponent,
+    PokeEvolutionComponent
   ],
   imports: [
     CommonModule,

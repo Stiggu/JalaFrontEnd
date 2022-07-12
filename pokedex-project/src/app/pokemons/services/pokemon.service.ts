@@ -31,12 +31,13 @@ export class PokemonService {
       description: species.data.flavor_text_entries[0].flavor_text,
       habitat: species.data.habitat.name,
       generation: species.data.generation.name,
+      evolutionChain: species.data.evolution_chain.url
     }
   }
 
-  async getPokemonEvolutions(url: string): Promise<PokemonEvolution[]> {
+  async getPokemonEvolutions(url: string, id: number): Promise<PokemonEvolution[]> {
     const evolutions = await axios(url);
-    return this.findEvolutionInRequest(evolutions.data.chain, evolutions.data.id);
+    return this.findEvolutionInRequest(evolutions.data.chain, id);
   }
 
   findEvolutionInRequest(evolutionData: any, id: number, currentData: PokemonEvolution[] = []) {
@@ -45,6 +46,8 @@ export class PokemonService {
     if (evolutionData.evolves_to.length === 0) {
       return currentData;
     }
+
+    console.log("TEST", evolutionData, id);
 
     evolutionData.evolves_to.forEach((evo: any) => {
       currentData.push({
@@ -74,13 +77,12 @@ export class PokemonService {
       stats: this.normalizeStats(mainData),
       species: species,
       types: this.normalizeTypes(mainData),
-      evolutions: await this.getPokemonEvolutions(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
+      evolutions: await this.getPokemonEvolutions(species.evolutionChain, id)
     };
   };
 
   normalizeTypes(mainData: any): PokemonTypes[] {
     const types = mainData.data.types.map((type: any) => type.type);
-    console.log(types);
     return [...types]
   }
 
