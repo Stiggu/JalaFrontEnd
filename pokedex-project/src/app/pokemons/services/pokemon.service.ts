@@ -65,9 +65,9 @@ export class PokemonService {
   }
 
   async getPokemon(id: number): Promise<PokemonProfile> {
-    const mainData = await axios(`${this.api}/pokemon/${id}`);
+/*    const mainData = await axios(`${this.api}/pokemon/${id}`);
     const species = await this.getPokemonSpecies(mainData.data.species.url);
-    return {
+    const builtPokemon = {
       image: mainData.data.sprites.front_default,
       url: `${this.api}/pokemon/${id}`,
       name: mainData.data.name,
@@ -79,6 +79,49 @@ export class PokemonService {
       types: this.normalizeTypes(mainData),
       evolutions: await this.getPokemonEvolutions(species.evolutionChain, id)
     };
+    return builtPokemon;*/
+    return {
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+      "url": "https://pokeapi.co/api/v2/pokemon/4",
+      "name": "charmander",
+      "id": 4,
+      "height": 6,
+      "weight": 85,
+      "stats": {
+        "hp": 39,
+        "attack": 52,
+        "defence": 43,
+        "specialAttack": 60,
+        "specialDefence": 50,
+        "speed": 65
+      },
+      "species": {
+        "url": "https://pokeapi.co/api/v2/pokemon-species/4/",
+        "colour": "red",
+        "description": "Obviously prefers\nhot places. When\nit rains, steam\fis said to spout\nfrom the tip of\nits tail.",
+        "habitat": "mountain",
+        "generation": "generation-i",
+        "evolutionChain": "https://pokeapi.co/api/v2/evolution-chain/2/"
+      },
+      "types": [
+        {
+          "name": "fire",
+          "url": "https://pokeapi.co/api/v2/type/10/"
+        }
+      ],
+      "evolutions": [
+        {
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+          "name": "charmeleon",
+          "url": "https://pokeapi.co/api/v2/pokemon-species/5/"
+        },
+        {
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+          "name": "charizard",
+          "url": "https://pokeapi.co/api/v2/pokemon-species/6/"
+        }
+      ]
+    }
   };
 
   normalizeTypes(mainData: any): PokemonTypes[] {
