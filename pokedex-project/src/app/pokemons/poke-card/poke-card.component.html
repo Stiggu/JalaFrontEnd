@@ -1,5 +1,4 @@
-<div class="text-break text-black text-center rounded h-100"
-     [style.background-color]="pokeData.color"
+<div class="text-break text-white text-center rounded h-100 shadow-lg p-3 mb-5 bg-dark"
      (click)="goToProfile()">
   <div class="h2 text-capitalize">
     {{pokeData.name}} #{{('00' + (pokeData.id)).slice(-3)}}

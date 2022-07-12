@@ -3,5 +3,5 @@
   url: string,
   image: string,
   id: number,
-  color: string
+  color?: string
 }

@@ -12,7 +12,7 @@ export class PokemonsResolver implements Resolve<PokemonListData[]>{
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PokemonListData[]> | Promise<PokemonListData[]> | PokemonListData[] {
-    return this.pokemonService.getPokemonMockData();
+    return this.pokemonService.getPokemonList();
   }
 
 }

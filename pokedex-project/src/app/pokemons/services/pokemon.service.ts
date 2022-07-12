@@ -1,6 +1,6 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import PokemonListData from "../../core/interfaces/PokemonListData";
 import {dataPokemons, pokemonColorMap} from "../../utils/utils";
 import axios from "axios";
@@ -19,8 +19,18 @@ export class PokemonService {
   constructor(private http: HttpClient) {
   }
 
-  getPokemonList(offset: number = 0, limit: number = 25) {
-    return this.http.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{ results: PokemonListData[] }>
+  async getPokemonList(offset: number = 0, limit: number = 50) {
+    const pokemonListRequest = await axios.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`)
+    const pokeListData: PokemonListData[] = []
+    for(let i = offset; i < limit; i++){
+        pokeListData.push({
+          id: i + 1,
+          image: this.getPokemonImageUri(i),
+          name: pokemonListRequest.data.results[i].name,
+          url: pokemonListRequest.data.results[i].url
+        })
+    }
+    return pokeListData;
   }
 
   async getPokemonSpecies(url: string): Promise<PokemonSpecies> {
