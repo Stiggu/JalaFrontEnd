@@ -8,13 +8,13 @@ import PokemonProfile from "../../core/interfaces/pokemonProfile";
   providedIn: 'root'
 })
 export class PokemonResolver implements Resolve<PokemonProfile> {
-  constructor() {
+  constructor(private pokemonService: PokemonService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PokemonProfile> | Promise<PokemonProfile> | PokemonProfile {
     const id = route.paramMap.get('id') || "1";
-    // return this.pokemonService.getPokemon(parseInt(id));
-    return {
+    return this.pokemonService.getPokemon(parseInt(id));
+    /*return {
       "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
       "url": "https://pokeapi.co/api/v2/pokemon/1",
       "name": "bulbasaur",
@@ -46,6 +46,6 @@ export class PokemonResolver implements Resolve<PokemonProfile> {
           "url": "https://pokeapi.co/api/v2/type/4/"
         }
       ],
-    }
+    }*/
   }
 }

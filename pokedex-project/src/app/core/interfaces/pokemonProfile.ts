@@ -1,6 +1,7 @@
 ﻿import PokemonSpecies from "./PokemonSpecies";
 import {PokemonTypes} from "./pokemonTypes";
 import PokemonStats from "./pokemonStats";
+import {PokemonEvolution} from "./pokemonEvolution";
 
 export default interface PokemonProfile {
   name: string,
@@ -11,5 +12,6 @@ export default interface PokemonProfile {
   height: number,
   stats: PokemonStats,
   types: PokemonTypes[],
-  species: PokemonSpecies
+  species: PokemonSpecies,
+  evolutions: PokemonEvolution[]
 }
