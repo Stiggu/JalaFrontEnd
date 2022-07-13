@@ -1,0 +1,17 @@
+.docheck-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #175691;
+}
+
+.changelog {
+  margin: 30px;
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;
+  border: 1px solid #0a53be;
+}

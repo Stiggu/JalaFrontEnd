@@ -1,0 +1,16 @@
+<div class="docheck-container">
+  <h3 class="">
+    Change Name
+  </h3>
+  <div class="">
+    <input type="text" [value]="name" [ngModel]="name" (ngModelChange)="changeName($event)">
+  </div>
+  <div class="changelog">
+    {{name}}
+    <div class="" *ngFor="let log of changeLog">
+      <h5>
+        {{log}}
+      </h5>
+    </div>
+  </div>
+</div>
