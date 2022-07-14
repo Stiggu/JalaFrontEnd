@@ -1,6 +1,5 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
 import PokemonListData from "../../core/interfaces/PokemonListData";
 import {dataPokemons, pokemonColorMap} from "../../utils/utils";
 import axios from "axios";
@@ -19,16 +18,21 @@ export class PokemonService {
   constructor(private http: HttpClient) {
   }
 
+  findId(url: string) {
+    return parseInt(url.split('/').reverse()[1]);
+  }
+
   async getPokemonList(offset: number = 0, limit: number = 50) {
     const pokemonListRequest = await axios.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`)
     const pokeListData: PokemonListData[] = []
-    for(let i = offset; i < limit; i++){
-        pokeListData.push({
-          id: i + 1,
-          image: this.getPokemonImageUri(i),
-          name: pokemonListRequest.data.results[i].name,
-          url: pokemonListRequest.data.results[i].url
-        })
+    for (let i = 0; i < pokemonListRequest.data.results.length; i++) {
+      const id = this.findId(pokemonListRequest.data.results[i].url);
+      pokeListData.push({
+        id: id,
+        image: this.getPokemonImageUri(id),
+        name: pokemonListRequest.data.results[i].name,
+        url: pokemonListRequest.data.results[i].url
+      })
     }
     return pokeListData;
   }
@@ -75,21 +79,21 @@ export class PokemonService {
   }
 
   async getPokemon(id: number): Promise<PokemonProfile> {
-/*    const mainData = await axios(`${this.api}/pokemon/${id}`);
-    const species = await this.getPokemonSpecies(mainData.data.species.url);
-    const builtPokemon = {
-      image: mainData.data.sprites.front_default,
-      url: `${this.api}/pokemon/${id}`,
-      name: mainData.data.name,
-      id: id,
-      height: mainData.data.height,
-      weight: mainData.data.weight,
-      stats: this.normalizeStats(mainData),
-      species: species,
-      types: this.normalizeTypes(mainData),
-      evolutions: await this.getPokemonEvolutions(species.evolutionChain, id)
-    };
-    return builtPokemon;*/
+    /*    const mainData = await axios(`${this.api}/pokemon/${id}`);
+        const species = await this.getPokemonSpecies(mainData.data.species.url);
+        const builtPokemon = {
+          image: mainData.data.sprites.front_default,
+          url: `${this.api}/pokemon/${id}`,
+          name: mainData.data.name,
+          id: id,
+          height: mainData.data.height,
+          weight: mainData.data.weight,
+          stats: this.normalizeStats(mainData),
+          species: species,
+          types: this.normalizeTypes(mainData),
+          evolutions: await this.getPokemonEvolutions(species.evolutionChain, id)
+        };
+        return builtPokemon;*/
     return {
       "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
       "url": "https://pokeapi.co/api/v2/pokemon/4",

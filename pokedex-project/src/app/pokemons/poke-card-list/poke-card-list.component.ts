@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import PokemonListData from "../../core/interfaces/PokemonListData";
 import {PokemonService} from "../services/pokemon.service";
-import {PokemonsResolver} from "../pokemons.resolver";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -10,8 +9,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./poke-card-list.component.sass']
 })
 export class PokeCardListComponent implements OnInit {
-
-  pokemonList: PokemonListData[] = [];
+  originalPokemonList!: PokemonListData[];
+  pokemonList!: PokemonListData[];
   search: string = '';
   listSize = 0;
   offset = 0;
@@ -21,27 +20,23 @@ export class PokeCardListComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
   }
 
-  searchChanged(value: string) {
-    this.search = value;
+  searchChanged(value: PokemonListData[]) {
+    this.pokemonList = value;
   }
 
   listSizeChanged(value: number) {
     this.listSize = value;
   }
 
-  offsetChanged() {
+  async changeOffset() {
     this.offset = this.listSize;
-  }
-
-  filterPokemons(pokemons: PokemonListData[]): PokemonListData[] {
-    if (!this.search) {
-      return this.pokemonList.slice(this.offset, this.offset + 50);
-    }
-    return pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.search)).slice(this.offset, this.offset + 50);
+    this.originalPokemonList = await this.pokemonService.getPokemonList(this.offset);
+    this.pokemonList = this.originalPokemonList;
   }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({pokemons}) => {
+      this.originalPokemonList = pokemons;
       this.pokemonList = pokemons;
     })
   }
