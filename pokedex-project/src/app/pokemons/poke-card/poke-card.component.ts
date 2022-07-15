@@ -9,13 +9,13 @@ import {Router} from "@angular/router";
 })
 export class PokeCardComponent {
 
-  constructor(private router: Router) {
-  }
-
   @Input()
   pokeData!: PokemonListData;
 
-  goToProfile(){
+  constructor(private router: Router) {
+  }
+
+  goToProfile() {
     this.router.navigate([`/pokedex/${this.pokeData.id}`]);
   }
 }

@@ -15,7 +15,7 @@ import {PokemonTypes} from "../../core/interfaces/pokemonTypes";
 export class PokemonService {
   private api = 'https://pokeapi.co/api/v2';
 
-  constructor(private http: HttpClient) {
+  constructor() {
   }
 
   findId(url: string) {
@@ -31,10 +31,15 @@ export class PokemonService {
         id: id,
         image: this.getPokemonImageUri(id),
         name: pokemonListRequest.data.results[i].name,
-        url: pokemonListRequest.data.results[i].url
+        url: pokemonListRequest.data.results[i].url,
+        color: this.getPokemonColourFromHash(id),
       })
     }
     return pokeListData;
+  }
+
+  getPokemonColourFromHash(id: number){
+    return Object.values(pokemonColorMap)[id];
   }
 
   async getPokemonSpecies(url: string): Promise<PokemonSpecies> {

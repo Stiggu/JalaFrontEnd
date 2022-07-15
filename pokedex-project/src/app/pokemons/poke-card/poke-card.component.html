@@ -1,6 +1,6 @@
-<div class="text-break text-white text-center rounded h-100 shadow-lg p-3 mb-5 bg-dark"
+<div class="text-break text-white text-center rounded h-100 shadow-lg p-3 mb-5" [ngStyle]="{'background-color': pokeData.color}"
      (click)="goToProfile()">
-  <div class="h2 text-capitalize">
+  <div class="h2 text-capitalize text-dark">
     {{pokeData.name}} #{{('00' + (pokeData.id)).slice(-3)}}
   </div>
   <div>
