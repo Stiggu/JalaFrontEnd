@@ -1,7 +1,7 @@
 ﻿import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import PokemonListData from "../../core/interfaces/PokemonListData";
-import {dataPokemons, pokemonColorMap} from "../../utils/utils";
+import {dataPokemons} from "../../utils/utils";
+import {pokemonColorMap} from "../../utils/pokemonColorHash";
 import axios from "axios";
 import PokemonSpecies from "../../core/interfaces/PokemonSpecies";
 import PokemonProfile from "../../core/interfaces/pokemonProfile";
@@ -44,11 +44,12 @@ export class PokemonService {
 
   async getPokemonSpecies(url: string): Promise<PokemonSpecies> {
     const species = await axios(url);
+    console.log(species);
     return {
       url: url,
       colour: species.data.color.name,
       description: species.data.flavor_text_entries[0].flavor_text,
-      habitat: species.data.habitat.name,
+      habitat: species.data.habitat?.name,
       generation: species.data.generation.name,
       evolutionChain: species.data.evolution_chain.url
     }

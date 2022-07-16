@@ -13,7 +13,7 @@ export class PokeCardListComponent implements OnInit {
   pokemonList!: PokemonListData[];
   search: string = '';
   listSize = 0;
-  offset = 0;
+  offset = 1;
 
   constructor(
     private pokemonService: PokemonService,
@@ -28,9 +28,12 @@ export class PokeCardListComponent implements OnInit {
     this.listSize = value;
   }
 
-  async changeOffset() {
-    this.offset = this.listSize;
-    this.originalPokemonList = await this.pokemonService.getPokemonList(this.offset);
+  async changeOffset(offset: number) {
+    this.offset += offset;
+    if (this.offset < 0) {
+      this.offset = 0;
+    }
+    this.originalPokemonList = await this.pokemonService.getPokemonList((this.offset - 1) * 50);
     this.pokemonList = this.originalPokemonList;
   }
 

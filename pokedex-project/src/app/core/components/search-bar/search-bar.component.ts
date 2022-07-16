@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import PokemonListData from "../../interfaces/PokemonListData";
 
 @Component({
   selector: 'app-search-bar',

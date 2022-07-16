@@ -1,21 +1,16 @@
 <div class="container-fluid">
-  <div class="row align-items-end">
-    <div class="offset-4 col-2">
-      <app-search-bar (searchChanged)="searchChanged($event)" [pokemons]="originalPokemonList" [searchKey]="['name', 'id']"></app-search-bar>
-    </div>
+  <div class="row align-items-end justify-content-center">
     <div class="col-2">
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-success" ngbDropdownToggle>View Options
-        </button>
-
-        <div class="bg-dark text-white" ngbDropdownMenu aria-labelledby="dropdownForm1">
-          <div class="m-2 mb-3">
-            <label for="list-size" class="lead">Offset:</label>
-            <input id="list-size" type="number" class="form-control" [ngModel]="listSize"
-                   (ngModelChange)="listSizeChanged($event)">
-            <button type="button" class="btn btn-outline-success mt-3" (click)="changeOffset()">Apply</button>
-          </div>
-        </div>
+      <app-search-bar (searchChanged)="searchChanged($event)" [pokemons]="originalPokemonList"
+                      [searchKey]="['name', 'id']"></app-search-bar>
+    </div>
+    <div class="text-white col-2">
+      <p class="h3">Pagination</p>
+      <div class="d-inline-flex page-bar">
+        <button type="button" class="btn btn-outline-light me-2" (click)="changeOffset(-1)"><</button>
+          <input id="list-size" type="number" class="form-control w-25" [ngModel]="offset"
+                 (ngModelChange)="listSizeChanged($event)">
+          <button type="button" class="btn btn-outline-light ms-2" (click)="changeOffset(1)">></button>
       </div>
     </div>
   </div>

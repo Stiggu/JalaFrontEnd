@@ -2,7 +2,7 @@
   url: string,
   colour: string,
   description: string,
-  habitat: string,
+  habitat?: string,
   generation: string,
   evolutionChain: string
 }
