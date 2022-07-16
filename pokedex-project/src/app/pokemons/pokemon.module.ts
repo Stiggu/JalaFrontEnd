@@ -11,6 +11,7 @@ import {CommonModule} from "@angular/common";
 import {PokeChartComponent} from "./pokemon/poke-chart/poke-chart.component";
 import {PokeEvolutionComponent} from "./pokemon/poke-evolutions/poke-evolution.component";
 import {PokemonAddComponent} from "./pokemon/pokemon-add/pokemon-add.component";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -21,14 +22,15 @@ import {PokemonAddComponent} from "./pokemon/pokemon-add/pokemon-add.component";
     PokeEvolutionComponent,
     PokemonAddComponent,
   ],
-  imports: [
-    CommonModule,
-    CoreModule,
-    FormsModule,
-    ReactiveFormsModule,
-    PokemonRoutingModule,
-    NgbDropdownModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PokemonRoutingModule,
+        NgbDropdownModule,
+        FontAwesomeModule,
+    ],
   exports: [
     PokemonAddComponent
   ],

@@ -21,6 +21,10 @@
     </div>
   </div>
 
+  <div class="col-6">
+    <poke-chart [pokemon]="pokemon"></poke-chart>
+  </div>
+
   <div class="col-6 text-center text-white">
     <!--    Info panel   -->
     <div class="h1">
@@ -63,13 +67,10 @@
     </div>
   </div>
 
-  <div class="col-6">
+  <div class="col-6 h-50">
     <poke-evolution [evolutionData]="pokemon.evolutions"></poke-evolution>
   </div>
 
-  <div class="col-6">
-    <poke-chart [pokemon]="pokemon"></poke-chart>
-  </div>
 
   <div class="col-12 d-flex justify-content-center mt-5">
     <div (click)="goBack()" class="text-white btn btn-outline-success">Go back</div>

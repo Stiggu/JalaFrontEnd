@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app.routing.module";
 import {PokemonModule} from "./pokemons/pokemon.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {PokemonModule} from "./pokemons/pokemon.module";
         AppRoutingModule,
         HttpClientModule,
         PokemonModule,
+        FontAwesomeModule,
     ],
   providers: [],
   exports: [],
