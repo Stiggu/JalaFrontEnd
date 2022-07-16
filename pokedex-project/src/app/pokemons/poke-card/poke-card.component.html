@@ -1,9 +1,9 @@
-<div class="text-break text-white text-center rounded h-100 shadow-lg p-3 mb-5" [ngStyle]="{'background-color': pokeData.color}"
+<div class="text-break text-center rounded h-100 shadow-lg p-3 mb-5" [ngStyle]="getStyles()"
      (click)="goToProfile()">
-  <div class="h2 text-capitalize text-dark">
-    {{pokeData.name}} #{{('00' + (pokeData.id)).slice(-3)}}
+  <div class="h2 text-capitalize">
+    {{getCompleteName()}}
   </div>
   <div>
-    <img class="img-fluid" [src]="pokeData.image" alt="Picture of a pokemon">
+    <img class="img-fluid h-100" [src]="pokeData.image" alt="Picture of a pokemon">
   </div>
 </div>

@@ -6,7 +6,6 @@ import axios from "axios";
 import PokemonSpecies from "../../core/interfaces/PokemonSpecies";
 import PokemonProfile from "../../core/interfaces/pokemonProfile";
 import PokemonStats from "../../core/interfaces/pokemonStats";
-import {PokemonEvolution} from "../../core/interfaces/pokemonEvolution";
 import {PokemonTypes} from "../../core/interfaces/pokemonTypes";
 
 @Injectable({
@@ -32,14 +31,14 @@ export class PokemonService {
         image: this.getPokemonImageUri(id),
         name: pokemonListRequest.data.results[i].name,
         url: pokemonListRequest.data.results[i].url,
-        color: this.getPokemonColourFromHash(id - 1),
+        color: this.getPokemonColourFromHash(id),
       })
     }
     return pokeListData;
   }
 
   getPokemonColourFromHash(id: number) {
-    return Object.values(pokemonColorMap)[id];
+    return Object.values(pokemonColorMap)[id - 1];
   }
 
   async getPokemonSpecies(url: string): Promise<PokemonSpecies> {
@@ -55,16 +54,18 @@ export class PokemonService {
     }
   }
 
-  async getPokemonEvolutions(url: string): Promise<PokemonEvolution[]> {
+  async getPokemonEvolutions(url: string): Promise<PokemonListData[]> {
     const evolutions = await axios(url);
     return this.findEvolutionInRequest(evolutions.data.chain, this.findId(evolutions.data.chain.species.url));
   }
 
-  findEvolutionInRequest(evolutionData: any, id: number, currentData: PokemonEvolution[] = []) {
+  findEvolutionInRequest(evolutionData: any, id: number, currentData: PokemonListData[] = []) {
     currentData.push({
+      id: id,
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
       name: evolutionData.species.name,
-      url: evolutionData.species.url
+      url: evolutionData.species.url,
+      color: this.getPokemonColourFromHash(id),
     })
 
     if (evolutionData.evolves_to.length !== 0) {
@@ -77,7 +78,7 @@ export class PokemonService {
   async getPokemon(id: number): Promise<PokemonProfile> {
     const mainData = await axios(`${this.api}/pokemon/${id}`);
     const species = await this.getPokemonSpecies(mainData.data.species.url);
-    const builtPokemon = {
+    return {
       image: mainData.data.sprites.front_default,
       url: `${this.api}/pokemon/${id}`,
       name: mainData.data.name,
@@ -89,50 +90,6 @@ export class PokemonService {
       types: this.normalizeTypes(mainData),
       evolutions: await this.getPokemonEvolutions(species.evolutionChain)
     };
-    return builtPokemon;
-    /*return {
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-      "url": "https://pokeapi.co/api/v2/pokemon/4",
-      "name": "charmander",
-      "id": 4,
-      "height": 6,
-      "weight": 85,
-      "stats": {
-        "hp": 39,
-        "attack": 52,
-        "defence": 43,
-        "specialAttack": 60,
-        "specialDefence": 50,
-        "speed": 65
-      },
-      "species": {
-        "url": "https://pokeapi.co/api/v2/pokemon-species/4/",
-        "colour": "red",
-        "description": "Obviously prefers\nhot places. When\nit rains, steam\fis said to spout\nfrom the tip of\nits tail.",
-        "habitat": "mountain",
-        "generation": "generation-i",
-        "evolutionChain": "https://pokeapi.co/api/v2/evolution-chain/2/"
-      },
-      "types": [
-        {
-          "name": "fire",
-          "url": "https://pokeapi.co/api/v2/type/10/"
-        }
-      ],
-      "evolutions": [
-        {
-          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-          "name": "charmeleon",
-          "url": "https://pokeapi.co/api/v2/pokemon-species/5/"
-        },
-        {
-          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-          "name": "charizard",
-          "url": "https://pokeapi.co/api/v2/pokemon-species/6/"
-        }
-      ]
-    }
-  };*/
   }
 
   normalizeTypes(mainData: any): PokemonTypes[] {

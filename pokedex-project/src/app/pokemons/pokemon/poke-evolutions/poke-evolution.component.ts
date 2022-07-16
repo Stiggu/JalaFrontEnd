@@ -1,7 +1,6 @@
 ﻿import {Component, Input} from "@angular/core";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {PokemonEvolution} from "../../../core/interfaces/pokemonEvolution";
+import PokemonListData from "../../../core/interfaces/PokemonListData";
 
 @Component({
   selector: 'poke-evolution',
@@ -10,20 +9,6 @@ import {PokemonEvolution} from "../../../core/interfaces/pokemonEvolution";
 })
 export class PokeEvolutionComponent {
   @Input()
-  evolutionData!: PokemonEvolution[];
-
+  evolutionData!: PokemonListData[];
   faArrowRight = faArrowRight
-
-  placeArrow(offset: number){
-    return {
-      'position': 'absolute',
-      'left': '50%',
-      'right': '100%',
-      'margin-top': '62px',
-      'margin-left': (180 * offset).toString() + 'px',
-      'background': 'blue',
-      'width': '20px',
-      'text-align': 'center',
-    }
-  }
 }

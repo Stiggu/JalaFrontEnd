@@ -5,8 +5,7 @@
     </div>
     <div class="row align-content-center">
       <div class=" position-relative col-4 text-center" *ngFor="let evolution of evolutionData; index as i">
-        <img class="img-fluid poke-image" [src]="evolution.image" alt="Image of a pokemon">
-        <div class="h3">{{evolution.name}}</div>
+        <app-poke-card [pokeData]="evolution" [showNumber]="false"></app-poke-card>
         <fa-icon class="position-absolute end-0" [icon]="faArrowRight" *ngIf="i+1 <evolutionData.length"></fa-icon>
       </div>
     </div>
