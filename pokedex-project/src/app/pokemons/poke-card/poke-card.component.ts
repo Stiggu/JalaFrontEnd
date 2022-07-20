@@ -21,15 +21,11 @@ export class PokeCardComponent {
   constructor(private router: Router) {
   }
 
-  getStyles(){
-    if(this.showNumber){
-      return {
-        'background-color': this.pokeData.color
-      }
+  getStyles() {
+    return {
+      'background-color': this.pokeData.color
     }
 
-    return {
-    }
   }
 
   goToProfile() {

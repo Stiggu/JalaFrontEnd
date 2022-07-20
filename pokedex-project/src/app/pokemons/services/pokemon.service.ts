@@ -60,10 +60,17 @@ export class PokemonService {
   async getPokemonSpecies(url: string): Promise<PokemonSpecies> {
     const species = await axios(url);
     console.log(species);
+    let flavourText: string = '';
+    for (let textEntries of species.data.flavor_text_entries) {
+      if(textEntries.language.name === 'en'){
+        flavourText = textEntries.flavor_text;
+        break;
+      }
+    }
     return {
       url: url,
       colour: species.data.color.name,
-      description: species.data.flavor_text_entries[0].flavor_text,
+      description: flavourText,
       habitat: species.data.habitat?.name,
       generation: species.data.generation.name,
       evolutionChain: species.data.evolution_chain.url

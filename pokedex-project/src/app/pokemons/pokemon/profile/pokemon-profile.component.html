@@ -4,20 +4,17 @@
       <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
         {{pokemon.name}}
 
-        <h3 class="m-3">
-          <div class="badge" [style.background-color]="pokemon.species.colour">
+        <h3 class="m-3 h1">
+          <div class="badge">
             #{{('00' + (pokemon.id)).slice(-3)}}
           </div>
         </h3>
 
-        <span
-          [style.background-color]="pokemon.species.colour">
-        </span>
       </div>
       <div>
-        <img class="w-50" [src]="pokemon.image" alt="Card image cap">
+        <img class="w-50" [src]="pokemon.image" [style]="getStylesForBorders()" alt="Card image cap">
       </div>
-      <p class="h4 text-info">{{pokemon.species?.description}}</p>
+      <p class="h4 mt-3 text-info">{{pokemon.species?.description}}</p>
     </div>
   </div>
 

@@ -30,4 +30,10 @@ export class PokemonProfileComponent implements OnInit {
       this.pokemon = pokemon;
     })
   }
+
+  getStylesForBorders(){
+    return {
+      'border': `1px ${this.pokemon.species.colour} solid`
+    }
+  }
 }
