@@ -1,76 +1,78 @@
-﻿<div class="row mt-5">
-  <div class="col-sm-12 col-md-6 d-flex justify-content-center">
-    <div class="text-white text-center">
-      <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
-        {{pokemon.name}}
+﻿<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-6 justify-content-center">
+      <div class="text-white text-center">
+        <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
+          {{pokemon.name}}
 
-        <h3 class="m-3 h1">
-          <div class="badge">
-            #{{('00' + (pokemon.id)).slice(-3)}}
-          </div>
-        </h3>
+          <h3 class="m-3 h1">
+            <div class="badge">
+              #{{('00' + (pokemon.id)).slice(-3)}}
+            </div>
+          </h3>
 
+        </div>
+        <div>
+          <img class="w-50" [src]="pokemon.image" [style]="getStylesForBorders()" alt="Card image cap">
+        </div>
+        <p class="h4 mt-3 text-info">{{pokemon.species?.description}}</p>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <poke-chart [pokemon]="pokemon"></poke-chart>
+    </div>
+
+    <div class="col-sm-12 col-md-6 text-center text-white">
+      <!--    Info panel   -->
+      <div class="h1">
+        Information
       </div>
       <div>
-        <img class="w-50" [src]="pokemon.image" [style]="getStylesForBorders()" alt="Card image cap">
-      </div>
-      <p class="h4 mt-3 text-info">{{pokemon.species?.description}}</p>
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-6">
-    <poke-chart [pokemon]="pokemon"></poke-chart>
-  </div>
-
-  <div class="col-sm-12 col-md-6 text-center text-white">
-    <!--    Info panel   -->
-    <div class="h1">
-      Information
-    </div>
-    <div>
-      <div class="row">
-        <div class="col-6 align-self-center">
-          <div>
-            Types
-          </div>
-          <div class="d-flex justify-content-center">
-            <div *ngFor="let type of pokemon.types" class="m-2">
-              <h4>
-                <div class="text-uppercase badge bg-light text-dark">
-                  {{type.name}}
-                </div>
-              </h4>
+        <div class="row">
+          <div class="col-6 align-self-center">
+            <div>
+              Types
+            </div>
+            <div class="d-flex justify-content-center">
+              <div *ngFor="let type of pokemon.types" class="m-2">
+                <h4>
+                  <div class="text-uppercase badge bg-light text-dark">
+                    {{type.name}}
+                  </div>
+                </h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-2">
-          <div class="">Weight</div>
-          <h4 class="m-2">
-            <div class="text-uppercase badge bg-light text-dark">
-              {{pokemon.weight}}
-            </div>
-          </h4>
-        </div>
-        <div class="col-1">
-          <div class="">Height</div>
-          <h4 class="m-2">
-            <div class="text-uppercase badge bg-light text-dark">
-              {{pokemon.height}}
-            </div>
-          </h4>
-        </div>
+          <div class="col-2">
+            <div class="">Weight</div>
+            <h4 class="m-2">
+              <div class="text-uppercase badge bg-light text-dark">
+                {{pokemon.weight}}
+              </div>
+            </h4>
+          </div>
+          <div class="col-1">
+            <div class="">Height</div>
+            <h4 class="m-2">
+              <div class="text-uppercase badge bg-light text-dark">
+                {{pokemon.height}}
+              </div>
+            </h4>
+          </div>
 
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-sm-12 col-md-6 h-50">
-    <poke-evolution [evolutionData]="pokemon.evolutions"></poke-evolution>
-  </div>
+    <div class="col-sm-12 col-md-6 h-50">
+      <poke-evolution [evolutionData]="pokemon.evolutions"></poke-evolution>
+    </div>
 
 
-  <div class="col-12 d-flex justify-content-center mt-5">
-    <div (click)="goBack()" class="text-white btn btn-outline-success">Go back</div>
+    <div class="col-12 d-flex justify-content-center mt-5">
+      <div (click)="goBack()" class="text-dark btn btn-light">Go back</div>
+    </div>
   </div>
 </div>
 
