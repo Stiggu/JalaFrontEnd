@@ -1,12 +1,15 @@
-* {
-  font-family: "VT323", Consolas, sans-serif;
-}
-
 header {
-  max-height: 100px;
+  min-height: 100px;
+  background-color: #FB1B1B;
 }
 header img {
+  min-height: 80px;
+  min-width: 200px;
   max-height: 80px;
+}
+
+* {
+  font-family: "VT323", Consolas, sans-serif;
 }
 
 /*# sourceMappingURL=app.component.css.map */

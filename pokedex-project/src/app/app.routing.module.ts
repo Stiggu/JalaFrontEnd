@@ -1,5 +1,6 @@
 ﻿import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
+import {HomePageComponent} from "./core/components/home-page/home-page.component";
 
 const routes: Routes = [
   {
@@ -7,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./pokemons/pokemon.module').then(m => m.PokemonModule)
   },
   {
-    path: '', redirectTo: '', pathMatch: 'full'
+    path: '', component: HomePageComponent, pathMatch: 'full'
   }
 ];
 
