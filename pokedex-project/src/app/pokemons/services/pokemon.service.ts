@@ -63,7 +63,7 @@ export class PokemonService {
     let flavourText: string = '';
     for (let textEntries of species.data.flavor_text_entries) {
       if(textEntries.language.name === 'en'){
-        flavourText = textEntries.flavor_text;
+        flavourText = textEntries.flavor_text.replace('\f', ' ');
         break;
       }
     }

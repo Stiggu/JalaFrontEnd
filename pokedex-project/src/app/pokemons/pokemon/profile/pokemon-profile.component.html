@@ -1,5 +1,5 @@
 ﻿<div class="row mt-5">
-  <div class="col-6 d-flex justify-content-center">
+  <div class="col-sm-12 col-md-6 d-flex justify-content-center">
     <div class="text-white text-center">
       <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
         {{pokemon.name}}
@@ -18,11 +18,11 @@
     </div>
   </div>
 
-  <div class="col-6">
+  <div class="col-sm-12 col-md-6">
     <poke-chart [pokemon]="pokemon"></poke-chart>
   </div>
 
-  <div class="col-6 text-center text-white">
+  <div class="col-sm-12 col-md-6 text-center text-white">
     <!--    Info panel   -->
     <div class="h1">
       Information
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div class="col-6 h-50">
+  <div class="col-sm-12 col-md-6 h-50">
     <poke-evolution [evolutionData]="pokemon.evolutions"></poke-evolution>
   </div>
 
