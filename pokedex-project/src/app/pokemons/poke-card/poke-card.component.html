@@ -1,9 +1,18 @@
-<div class="text-break text-center rounded h-100 shadow-lg p-3 mb-5" [ngStyle]="getStyles()"
+<div class="text-break position-relative text-center rounded h-100 shadow-lg p-3 mb-5" [ngStyle]="getStyles()"
      (click)="goToProfile()">
-  <div class="h2 text-capitalize">
-    {{getCompleteName()}}
+  <div class="h3">
+
+    <div class="small text-light position-absolute top-0 start-50 translate-middle badge rounded-pill poke-id">
+      {{getNumber()}}
+    </div>
+
   </div>
-  <div>
+  <div class="h2 text-capitalize poke-id text-light">
+    {{pokeData.name}}
+  </div>
+
+  <div class="">
     <img class="img-fluid h-100" [src]="pokeData.image" alt="Picture of a pokemon">
+
   </div>
 </div>

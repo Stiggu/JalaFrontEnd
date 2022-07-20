@@ -20,6 +20,22 @@ export class PokemonService {
   findId(url: string) {
     return parseInt(url.split('/').reverse()[1]);
   }
+  async getPokemonByGeneration(generation: number){
+    const pokemonListRequest = await axios.get(`https://pokeapi.co/api/v2/generation/${generation}/`);
+    const pokeListData: PokemonListData[] = []
+    console.log(pokemonListRequest.data.pokemon_species);
+    for (let i = 0; i < pokemonListRequest.data.pokemon_species.length; i++) {
+      const id = this.findId(pokemonListRequest.data.pokemon_species[i].url);
+      pokeListData.push({
+        id: id,
+        image: this.getPokemonImageUri(id),
+        name: pokemonListRequest.data.pokemon_species[i].name,
+        url: pokemonListRequest.data.pokemon_species[i].url,
+        color: this.getPokemonColourFromHash(id),
+      })
+    }
+    return pokeListData;
+  }
 
   async getPokemonList(offset: number = 0, limit: number = 50) {
     const pokemonListRequest = await axios.get(`${this.api}/pokemon?limit=${limit}&offset=${offset}`)
