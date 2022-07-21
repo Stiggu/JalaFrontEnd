@@ -1,21 +1,25 @@
 ﻿<div class="container-fluid">
   <div class="row mt-5">
+
     <div class="col-sm-12 col-md-6 justify-content-center">
       <div class="text-white text-center">
         <div class="text-capitalize h1 d-flex justify-content-center align-items-center">
           {{pokemon.name}}
-
           <h3 class="m-3 h1">
             <div class="badge">
               #{{('00' + (pokemon.id)).slice(-3)}}
             </div>
           </h3>
-
         </div>
         <div>
           <img class="w-50" [src]="pokemon.image" [style]="getStylesForBorders()" alt="Card image cap">
         </div>
-        <p class="h4 mt-3 text-info">{{pokemon.species?.description}}</p>
+        <div>
+          <div class="btn btn-light text-dark mt-4 ms-2 text-uppercase" (click)="setLanguage(i)"
+               *ngFor="let language of pokemon.species.description; index as i">{{language.lang}}</div>
+          <p class="h4 mt-3 text-info">{{pokemon.species.description[lang].description}}</p>
+
+        </div>
       </div>
     </div>
 
@@ -29,38 +33,52 @@
         Information
       </div>
       <div>
+
         <div class="row">
-          <div class="col-6 align-self-center">
+          <div class="col-12 align-self-center">
             <div>
               Types
             </div>
             <div class="d-flex justify-content-center">
               <div *ngFor="let type of pokemon.types" class="m-2">
                 <h4>
-                  <div class="text-uppercase badge bg-light text-dark">
+                  <div class="text-uppercase btn btn-light text-dark">
                     {{type.name}}
                   </div>
                 </h4>
               </div>
             </div>
           </div>
-          <div class="col-2">
-            <div class="">Weight</div>
-            <h4 class="m-2">
-              <div class="text-uppercase badge bg-light text-dark">
-                {{pokemon.weight}}
-              </div>
-            </h4>
-          </div>
-          <div class="col-1">
-            <div class="">Height</div>
-            <h4 class="m-2">
-              <div class="text-uppercase badge bg-light text-dark">
-                {{pokemon.height}}
-              </div>
-            </h4>
-          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-12 align-self-center">
+            <div class="d-flex d-inline-flex">
+              <div class="d-flex flex-column">
+                <div class="">Weight</div>
+                <h4 class="m-2">
+                  <div class="text-uppercase btn btn-light text-dark">
+                    {{pokemon.weight}}
+                  </div>
+                </h4>
+              </div>
+              <div class="d-flex flex-column">
+                Height
+                <h4 class="m-2">
+                  <div class="text-uppercase btn btn-light text-dark">
+                    {{pokemon.height}}
+                  </div>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 align-self-center">
+            <div class="h4">Habitat</div>
+            <div class="text-uppercase btn btn-light text-dark">{{pokemon.species.habitat}}</div>
+          </div>
         </div>
       </div>
     </div>

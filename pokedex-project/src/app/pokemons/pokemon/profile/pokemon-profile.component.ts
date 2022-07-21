@@ -14,6 +14,7 @@ export class PokemonProfileComponent implements OnInit {
   id: number = 1;
   fields: any;
   pokemon!: PokemonProfile;
+  lang: number = 0;
 
   constructor(private location: Location, private pokemonService: PokemonService, private route: ActivatedRoute) {
   }
@@ -29,11 +30,16 @@ export class PokemonProfileComponent implements OnInit {
     this.route.data.subscribe(({pokemon}) => {
       this.pokemon = pokemon;
     })
+    console.log(this.pokemon);
   }
 
   getStylesForBorders(){
     return {
       'border': `1px ${this.pokemon.species.colour} solid`
     }
+  }
+
+  setLanguage(index: number){
+    this.lang = index;
   }
 }
