@@ -2,11 +2,11 @@
   <div class="row align-items-end justify-content-between">
 
     <div class="col-12 d-flex d-inline-flex justify-content-center">
-      <div class="w-25 align-self-end">
+      <div class="w-25 align-self-center">
         <app-search-bar class="" (searchChanged)="searchChanged($event)" [pokemons]="originalPokemonList"
                         [searchKey]="['name', 'id']"></app-search-bar>
       </div>
-      <div class="w-25 align-self-end text-white text-center">
+      <div class="w-25 align-self-center text-white text-center">
         <p class="h3">Pagination</p>
         <div class="d-inline-flex justify-content-center page-bar">
           <button type="button" class="btn btn-light me-2" (click)="changeOffset(-1)">
@@ -19,9 +19,9 @@
           </button>
         </div>
       </div>
-      <div class="w-25 text-center text-white align-self-end">
+      <div class="w-25 text-center text-white align-self-center">
         <div class="h2 text-white">Generations</div>
-        <div class="text-center btn bg-light text-dark ms-2 me-2" (click)="getGeneration(generation)" *ngFor="let generation of generations">
+        <div class="text-center btn bg-light text-dark m-2" (click)="getGeneration(generation)" *ngFor="let generation of generations">
           G{{generation}}</div>
       </div>
     </div>

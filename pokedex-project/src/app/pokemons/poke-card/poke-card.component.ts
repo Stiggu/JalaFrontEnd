@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import PokemonListData from "../../core/interfaces/PokemonListData";
 import {Router} from "@angular/router";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -16,6 +15,9 @@ export class PokeCardComponent {
 
   @Input()
   showNumber: boolean = true;
+
+  @Input()
+  size: string = "30px";
 
 
   constructor(private router: Router) {
