@@ -1,18 +1,24 @@
 ﻿<div class="container-fluid w-25 text-white mt-5">
   <div class="row">
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" action="" class="add-form col align-self-center">
-      <h2>Basic Info</h2>
+      <h2>Add to pokemon list</h2>
       <div class="mt-4 mb-4">
         <label for="poke-name" class="h5">Pokemon Name</label>
         <input class="form-control" type="text" id="poke-name" formControlName="pokemonName">
       </div>
 
       <div class="mt-4 mb-4">
-        <label for="poke-desc" class="h5">Pokemon Description</label>
-        <input class="form-control" type="text" id="poke-desc" formControlName="pokemonDescription">
+        <label for="poke-id" class="h5">Pokemon ID</label>
+        <input class="form-control" type="text" id="poke-id" formControlName="pokemonId">
       </div>
+
+      <div class="mt-4 mb-4">
+        <label for="poke-colour" class="h5">Pokemon Colour</label>
+        <input class="form-control" type="text" id="poke-colour" formControlName="pokemonColour">
+      </div>
+
       <div>
-        <button type="submit" class="btn btn-outline-success">Send</button>
+        <button type="submit" class="btn btn-light">Submit</button>
       </div>
     </form>
   </div>

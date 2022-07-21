@@ -10,7 +10,8 @@ export class PokemonAddComponent {
 
   profileForm = new FormGroup({
     pokemonName: new FormControl(''),
-    pokemonDescription: new FormControl(''),
+    pokemonId: new FormControl(''),
+    pokemonColour: new FormControl(''),
   })
 
   constructor(private fb: FormBuilder) {
