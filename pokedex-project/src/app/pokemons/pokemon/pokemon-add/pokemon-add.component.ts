@@ -18,6 +18,7 @@ export class PokemonAddComponent {
   }
 
   onSubmit(){
+    alert('Pokemon has been saved!');
     console.log(this.profileForm.value);
   }
 

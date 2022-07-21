@@ -9,22 +9,35 @@ First go to `pokedex-project` folder, then run in sequence:
 
 After that you will have a development server up and running!
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+# Challenges
+## First
+- [x] Create the angular project
+- [x] Make a README
+- [x] Steps to run the project
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Second
+- [x] Show a list of pokemon
+- [x] List must show IDs of the pokemons
+- [x] Search bar
+- [x] No result message
+- [x] Pagination
 
-## Running end-to-end tests
+## Third
+- [x] Pokemon profile
+- [x] Show name, id, description, type of the pokemon
+- [x] Stats of the pokemon in a chart
+- [x] A return button
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Fourth
+- [x] Pokemon's evolution chain
+- [x] Must be connected by arrows
+- [x] Should redirect to the pages of the evolutions
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Fifth
+- [x] New page to add pokemons to the pokedex
+- [x] Make a form to do such functionality
+- [x] When the form is submitted, show the msg in console
